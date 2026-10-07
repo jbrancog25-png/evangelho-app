@@ -1,9 +1,11 @@
+import { Link } from 'react-router-dom'
 import { ChevronRightIcon, CompartilharIcon, LouvoresIcon, PhotoIcon } from '../components/Icons'
 import logo from '../assets/vida-em-cristo.jpg'
 import { atalhosExplorar, campanhas, usuario, versiculoDia } from '../data/home'
 import type { AtalhoExplorar, AtalhoGrupo } from '../data/home'
 import { igrejasSeguidas } from '../data/igrejas'
 import IgrejasSeguidas from '../components/IgrejasSeguidas'
+import { useAuth } from '../hooks/useAuth'
 import './HomeScreen.css'
 
 /** Acima de 9.999 usa separador de milhar; abaixo disso fica como no painel: "1240 pontos". */
@@ -16,6 +18,11 @@ const gruposExplorar: Array<{ grupo: AtalhoGrupo; titulo: string }> = [
 ]
 
 export default function HomeScreen() {
+  const { session, profile, signOut } = useAuth()
+  const logado = !!session
+  const nomeExibir = profile?.nome ?? 'Visitante'
+  const inicial = (profile?.nome ?? 'V').charAt(0).toUpperCase()
+
   return (
     <div className="home">
       <header className="home__marca">
@@ -24,21 +31,35 @@ export default function HomeScreen() {
 
       <section className="home__saudacao" aria-label="Sua conta">
         <span className="home__avatar" aria-hidden="true">
-          {usuario.nome.charAt(0).toUpperCase()}
+          {logado ? inicial : '?'}
         </span>
         <div className="home__saudacao-texto">
-          <p className="home__saudacao-linha">{usuario.saudacao}</p>
-          <p className="home__saudacao-nome">{usuario.nome}</p>
+          <p className="home__saudacao-linha">A paz do Senhor!</p>
+          <p className="home__saudacao-nome">{nomeExibir}</p>
         </div>
-        <button type="button" className="home__avisos">
-          Avisos
-          {usuario.temAvisosNaoLidos && (
-            <span className="home__avisos-badge">
-              <span className="sr-only">Você tem avisos não lidos</span>
-            </span>
-          )}
-        </button>
+        {logado ? (
+          <button type="button" onClick={signOut} className="home__avisos">
+            Sair
+          </button>
+        ) : (
+          <Link to="/entrar" className="home__avisos">
+            Entrar
+          </Link>
+        )}
       </section>
+
+      {profile?.role === 'super_admin' && (
+        <Link to="/admin" className="card card--acesso-admin">
+          <span className="acesso-admin__titulo">Painel de administração</span>
+          <ChevronRightIcon className="acesso-admin__seta" />
+        </Link>
+      )}
+      {profile?.role === 'pastor' && (
+        <Link to="/pastor" className="card card--acesso-admin">
+          <span className="acesso-admin__titulo">Minhas igrejas</span>
+          <ChevronRightIcon className="acesso-admin__seta" />
+        </Link>
+      )}
 
       <section className="card card--saldo" aria-label="Seu saldo">
         <div className="saldo__info">

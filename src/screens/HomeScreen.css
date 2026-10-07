@@ -113,6 +113,28 @@
     var(--superficie);
 }
 
+.card--acesso-admin {
+  text-decoration: none;
+  color: inherit;
+  padding: 14px 18px;
+  background:
+    linear-gradient(140deg, rgb(226 195 138 / 18%), rgb(198 163 91 / 8%) 70%),
+    var(--superficie);
+}
+
+.acesso-admin__titulo {
+  flex: 1 1 auto;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--dourado-claro);
+}
+
+.acesso-admin__seta {
+  width: 18px;
+  height: 18px;
+  color: var(--dourado);
+}
+
 .saldo__info {
   flex: 1 1 auto;
   min-width: 0;

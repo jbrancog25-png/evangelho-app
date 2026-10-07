@@ -1,0 +1,151 @@
+.auth {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 22px 40px;
+  min-height: 100dvh;
+}
+
+.auth__voltar {
+  align-self: flex-start;
+  color: var(--dourado-claro);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.auth__logo {
+  width: 180px;
+  margin: 10px auto 0;
+  object-fit: contain;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 4px 14px rgb(198 163 91 / 30%));
+}
+
+.auth__titulo {
+  margin-top: 8px;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--txt-forte);
+}
+
+.auth__subtitulo {
+  margin-top: -8px;
+  color: var(--txt-medio);
+  font-size: 14.5px;
+  line-height: 1.4;
+}
+
+.auth__form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.auth__campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.auth__campo span {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dourado);
+}
+
+.auth__campo input {
+  padding: 14px 16px;
+  border: 1px solid var(--borda-forte);
+  border-radius: 12px;
+  background: var(--superficie);
+  color: var(--txt-forte);
+  font: inherit;
+  font-size: 16px;
+}
+
+.auth__campo input:focus {
+  outline: 2px solid var(--dourado-claro);
+  outline-offset: 2px;
+}
+
+.auth__erro {
+  padding: 12px 14px;
+  border: 1px solid rgb(229 52 43 / 50%);
+  border-radius: 12px;
+  background: rgb(229 52 43 / 10%);
+  color: #ffb6b1;
+  font-size: 14px;
+}
+
+.auth__sucesso {
+  padding: 12px 14px;
+  border: 1px solid rgb(52 199 123 / 40%);
+  border-radius: 12px;
+  background: rgb(52 199 123 / 10%);
+  color: #a7eac7;
+  font-size: 14px;
+}
+
+.auth__botao {
+  margin-top: 6px;
+  width: 100%;
+}
+
+.auth__rodape {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14.5px;
+  color: var(--txt-medio);
+}
+
+.auth__rodape a {
+  color: var(--dourado-claro);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.carregando {
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+  color: var(--txt-medio);
+  font-size: 15px;
+}
+
+.config__passos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 18px;
+  margin: 0;
+  border: 1px solid var(--borda-forte);
+  border-radius: 14px;
+  background: var(--superficie);
+  list-style: decimal inside;
+  color: var(--txt-forte);
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+
+.config__passos code,
+.config__passos pre {
+  display: block;
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #000;
+  color: var(--dourado-claro);
+  font-family: 'JetBrains Mono', 'SF Mono', monospace;
+  font-size: 12.5px;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.config__passos pre {
+  white-space: pre;
+  overflow-x: auto;
+}
