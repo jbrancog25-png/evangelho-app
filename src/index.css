@@ -1,0 +1,74 @@
+:root {
+  --fundo-topo: #000000;
+  --fundo-base: #000000;
+  --superficie: #141416;
+  --superficie-elev: #1b1b1e;
+  --borda: rgb(198 163 91 / 18%);
+  --borda-forte: rgb(198 163 91 / 42%);
+  --borda-tracejada: rgb(198 163 91 / 32%);
+
+  --dourado: #c6a35b;
+  --dourado-claro: #e2c38a;
+  --dourado-escuro: #8c7232;
+  --verde: #34c77b;
+  --ambar: #c6a35b;
+  --vermelho: #e5342b;
+
+  --txt-forte: #ffffff;
+  --txt-medio: #9a9aa0;
+
+  font-family: 'Nunito', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background: var(--fundo-base);
+  color: var(--txt-forte);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--dourado-claro);
+  outline-offset: 3px;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

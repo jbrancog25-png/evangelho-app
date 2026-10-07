@@ -1,0 +1,168 @@
+.igrejas__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0 var(--gutter);
+}
+
+.igreja {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--borda-forte);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgb(198 163 91 / 10%), transparent 55%),
+    var(--superficie);
+}
+
+.igreja__cabecalho {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.igreja__identidade {
+  min-width: 0;
+}
+
+.igreja__nome {
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--txt-forte);
+}
+
+.igreja__pastor {
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--txt-medio);
+}
+
+.igreja__palavra {
+  position: relative;
+  padding: 12px 14px;
+  border-left: 3px solid var(--dourado);
+  border-radius: 0 10px 10px 0;
+  background: rgb(198 163 91 / 6%);
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--txt-forte);
+}
+
+.igreja__palavra-rotulo {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dourado);
+}
+
+.igreja__detalhes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+
+.igreja__detalhe {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.igreja__detalhe dt {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dourado);
+}
+
+.igreja__detalhe dd {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--txt-forte);
+}
+
+.igreja__detalhe-local {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--txt-medio);
+}
+
+.igreja__link {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--dourado-claro);
+  font-size: 14.5px;
+  font-weight: 700;
+}
+
+.igreja__link-seta {
+  width: 16px;
+  height: 16px;
+}
+
+.igreja__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.igreja__acoes .botao {
+  flex: 1 1 140px;
+  padding: 12px 16px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.igrejas__vazio {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: calc(100% - (2 * var(--gutter)));
+  margin: 0 var(--gutter);
+  padding: 18px;
+  border: 1px dashed var(--borda-forte);
+  border-radius: 18px;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+}
+
+.igrejas__vazio-texto {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.igrejas__vazio-titulo {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--dourado-claro);
+}
+
+.igrejas__vazio-subtitulo {
+  font-size: 13.5px;
+  line-height: 1.35;
+  color: var(--txt-medio);
+}
+
+.igrejas__vazio-seta {
+  width: 20px;
+  height: 20px;
+  color: var(--dourado);
+}

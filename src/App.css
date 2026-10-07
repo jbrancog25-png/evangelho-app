@@ -1,0 +1,19 @@
+.app {
+  display: flex;
+  justify-content: center;
+  min-height: 100dvh;
+  background: #000000;
+}
+
+.app__tela {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  background: var(--fundo-base);
+}
+
+@media (min-width: 520px) {
+  .app__tela {
+    box-shadow: 0 0 60px rgb(0 0 0 / 75%);
+  }
+}
