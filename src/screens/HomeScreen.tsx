@@ -1,11 +1,14 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronRightIcon, CompartilharIcon, LouvoresIcon, PhotoIcon } from '../components/Icons'
 import logo from '../assets/vida-em-cristo.jpg'
-import { atalhosExplorar, campanhas, usuario, versiculoDia } from '../data/home'
-import type { AtalhoExplorar, AtalhoGrupo } from '../data/home'
+import { atalhosExplorar, usuario, versiculoDia as versiculoFallback, campanhas as campanhasFallback } from '../data/home'
+import type { AtalhoExplorar, AtalhoGrupo, Campanha as CampanhaMock } from '../data/home'
 import { igrejasSeguidas } from '../data/igrejas'
 import IgrejasSeguidas from '../components/IgrejasSeguidas'
 import { useAuth } from '../hooks/useAuth'
+import { supabase } from '../lib/supabase'
+import type { Campanha as CampanhaDb, Versiculo } from '../lib/tipos'
 import './HomeScreen.css'
 
 /** Acima de 9.999 usa separador de milhar; abaixo disso fica como no painel: "1240 pontos". */
@@ -17,11 +20,50 @@ const gruposExplorar: Array<{ grupo: AtalhoGrupo; titulo: string }> = [
   { grupo: 'fieis', titulo: 'Para todos os fiéis' },
 ]
 
+type CampanhaExibida = Pick<CampanhaMock, 'id' | 'titulo' | 'descricao' | 'cor' | 'imagem'>
+
+const hoje = () => new Date().toISOString().slice(0, 10)
+
 export default function HomeScreen() {
   const { session, profile, signOut } = useAuth()
   const logado = !!session
   const nomeExibir = profile?.nome ?? 'Visitante'
   const inicial = (profile?.nome ?? 'V').charAt(0).toUpperCase()
+
+  const [versiculo, setVersiculo] = useState<{ texto: string; referencia: string }>(versiculoFallback)
+  const [campanhasExib, setCampanhasExib] = useState<CampanhaExibida[]>(campanhasFallback)
+
+  useEffect(() => {
+    if (!logado) return
+    supabase
+      .from('versiculos')
+      .select('texto, referencia')
+      .eq('do_dia_em', hoje())
+      .maybeSingle()
+      .then(({ data }: { data: Pick<Versiculo, 'texto' | 'referencia'> | null }) => {
+        if (data) setVersiculo({ texto: data.texto, referencia: data.referencia })
+      })
+
+    supabase
+      .from('campanhas')
+      .select('id, titulo, descricao, cor, imagem_url')
+      .eq('publicada', true)
+      .order('criada_em', { ascending: false })
+      .limit(6)
+      .then(({ data }) => {
+        if (data && data.length > 0) {
+          setCampanhasExib(
+            data.map((c: Pick<CampanhaDb, 'id' | 'titulo' | 'descricao' | 'cor' | 'imagem_url'>) => ({
+              id: c.id,
+              titulo: c.titulo,
+              descricao: c.descricao ?? '',
+              cor: (c.cor === 'dourado' ? 'ambar' : c.cor) as CampanhaMock['cor'],
+              imagem: c.imagem_url ?? undefined,
+            })),
+          )
+        }
+      })
+  }, [logado])
 
   return (
     <div className="home">
@@ -80,8 +122,8 @@ export default function HomeScreen() {
             <CompartilharIcon className="botao__icone" /> Compartilhar
           </button>
         </div>
-        <p className="versiculo__texto">“{versiculoDia.texto}”</p>
-        <p className="versiculo__referencia">{versiculoDia.referencia}</p>
+        <p className="versiculo__texto">“{versiculo.texto}”</p>
+        <p className="versiculo__referencia">{versiculo.referencia}</p>
       </section>
 
       <button type="button" className="card card--louvores">
@@ -104,7 +146,7 @@ export default function HomeScreen() {
           Campanhas em destaque
         </h2>
         <ul className="campanhas">
-          {campanhas.map((campanha) => (
+          {campanhasExib.map((campanha) => (
             <li key={campanha.id} className="campanha">
               <div className="campanha__midia">
                 {campanha.imagem ? (
@@ -148,15 +190,15 @@ function GrupoExplorar({ titulo, itens }: { titulo: string; itens: AtalhoExplora
     <div className="explorar-grupo">
       <h3 className="explorar-grupo__titulo">{titulo}</h3>
       <ul className="explorar">
-        {itens.map(({ id, rotulo, Icone }) => (
+        {itens.map(({ id, rotulo, Icone, rota }) => (
           <li key={id} className="explorar__item">
-            <button type="button" className="pilula">
+            <Link to={rota} className="pilula">
               <span className="pilula__icone">
                 <Icone />
               </span>
               <span className="pilula__rotulo">{rotulo}</span>
               <ChevronRightIcon className="pilula__seta" />
-            </button>
+            </Link>
           </li>
         ))}
       </ul>

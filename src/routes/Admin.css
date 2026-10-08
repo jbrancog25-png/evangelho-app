@@ -49,7 +49,11 @@
   border: 1px solid var(--borda-forte);
   border-radius: 12px;
   background: var(--superficie);
+  overflow-x: auto;
+  scrollbar-width: none;
 }
+
+.admin__nav::-webkit-scrollbar { display: none; }
 
 .admin__nav-item {
   flex: 1 1 auto;

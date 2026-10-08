@@ -24,6 +24,14 @@ export default function Admin() {
       <nav className="admin__nav">
         <NavLink to="/admin/igrejas" className="admin__nav-item">Igrejas</NavLink>
         <NavLink to="/admin/pastores" className="admin__nav-item">Pastores</NavLink>
+        <NavLink to="/admin/eventos" className="admin__nav-item">Eventos</NavLink>
+        <NavLink to="/admin/campanhas" className="admin__nav-item">Campanhas</NavLink>
+        <NavLink to="/admin/vagas" className="admin__nav-item">Vagas</NavLink>
+        <NavLink to="/admin/versiculos" className="admin__nav-item">Versículos</NavLink>
+        <NavLink to="/admin/cursos" className="admin__nav-item">Cursos</NavLink>
+        <NavLink to="/admin/parceiros" className="admin__nav-item">Parceiros</NavLink>
+        <NavLink to="/admin/cestas" className="admin__nav-item">Cestas</NavLink>
+        <NavLink to="/admin/beneficios" className="admin__nav-item">Benefícios</NavLink>
       </nav>
 
       <main className="admin__main">

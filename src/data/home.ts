@@ -85,30 +85,31 @@ export type AtalhoExplorar = {
   rotulo: string
   Icone: ComponentType<SVGProps<SVGSVGElement>>
   grupo: AtalhoGrupo
+  rota: string
 }
 
 export const atalhosExplorar: AtalhoExplorar[] = [
-  { id: 'cultos', rotulo: 'Cultos', Icone: CultosIcon, grupo: 'igreja' },
-  { id: 'biblia', rotulo: 'Bíblia', Icone: BibliaIcon, grupo: 'igreja' },
-  { id: 'louvores', rotulo: 'Louvores', Icone: LouvoresIcon, grupo: 'igreja' },
-  { id: 'dizimo', rotulo: 'Dízimo e ofertas', Icone: DizimoIcon, grupo: 'igreja' },
-  { id: 'desapego', rotulo: 'Desapego', Icone: DesapegoIcon, grupo: 'igreja' },
-  { id: 'missoes', rotulo: 'Missões', Icone: MissoesIcon, grupo: 'igreja' },
+  { id: 'cultos', rotulo: 'Cultos', Icone: CultosIcon, grupo: 'igreja', rota: '/em-breve/cultos' },
+  { id: 'biblia', rotulo: 'Bíblia', Icone: BibliaIcon, grupo: 'igreja', rota: '/em-breve/biblia' },
+  { id: 'louvores', rotulo: 'Louvores', Icone: LouvoresIcon, grupo: 'igreja', rota: '/em-breve/louvores' },
+  { id: 'dizimo', rotulo: 'Dízimo e ofertas', Icone: DizimoIcon, grupo: 'igreja', rota: '/em-breve/dizimo' },
+  { id: 'desapego', rotulo: 'Desapego', Icone: DesapegoIcon, grupo: 'igreja', rota: '/em-breve/desapego' },
+  { id: 'missoes', rotulo: 'Missões', Icone: MissoesIcon, grupo: 'igreja', rota: '/em-breve/missoes' },
 
-  { id: 'eventos', rotulo: 'Eventos', Icone: EventosIcon, grupo: 'fieis' },
-  { id: 'esportes', rotulo: 'Esportes', Icone: EsportesIcon, grupo: 'fieis' },
-  { id: 'shows', rotulo: 'Shows', Icone: ShowsIcon, grupo: 'fieis' },
-  { id: 'cultura', rotulo: 'Cultura', Icone: CulturaIcon, grupo: 'fieis' },
-  { id: 'educacao', rotulo: 'Educação', Icone: EducacaoIcon, grupo: 'fieis' },
-  { id: 'cursos', rotulo: 'Cursos', Icone: CursosIcon, grupo: 'fieis' },
-  { id: 'saude', rotulo: 'Saúde', Icone: SaudeIcon, grupo: 'fieis' },
-  { id: 'sangue', rotulo: 'Sangue', Icone: SangueIcon, grupo: 'fieis' },
-  { id: 'cestas-basicas', rotulo: 'Cestas básicas', Icone: CestasIcon, grupo: 'fieis' },
-  { id: 'beneficios', rotulo: 'Clube de benefícios', Icone: BeneficiosIcon, grupo: 'fieis' },
-  { id: 'parceiros', rotulo: 'Entidades parceiras', Icone: ParceirosIcon, grupo: 'fieis' },
-  { id: 'vagas', rotulo: 'Vagas de emprego', Icone: VagasIcon, grupo: 'fieis' },
-  { id: 'ingles', rotulo: 'Inglês', Icone: InglesIcon, grupo: 'fieis' },
-  { id: 'carteira', rotulo: 'Carteira', Icone: CarteiraIcon, grupo: 'fieis' },
-  { id: 'ranking', rotulo: 'Ranking', Icone: RankingIcon, grupo: 'fieis' },
-  { id: 'perfil', rotulo: 'Perfil', Icone: PerfilIcon, grupo: 'fieis' },
+  { id: 'eventos', rotulo: 'Eventos', Icone: EventosIcon, grupo: 'fieis', rota: '/eventos' },
+  { id: 'esportes', rotulo: 'Esportes', Icone: EsportesIcon, grupo: 'fieis', rota: '/em-breve/esportes' },
+  { id: 'shows', rotulo: 'Shows', Icone: ShowsIcon, grupo: 'fieis', rota: '/em-breve/shows' },
+  { id: 'cultura', rotulo: 'Cultura', Icone: CulturaIcon, grupo: 'fieis', rota: '/em-breve/cultura' },
+  { id: 'educacao', rotulo: 'Educação', Icone: EducacaoIcon, grupo: 'fieis', rota: '/em-breve/educacao' },
+  { id: 'cursos', rotulo: 'Cursos', Icone: CursosIcon, grupo: 'fieis', rota: '/cursos' },
+  { id: 'saude', rotulo: 'Saúde', Icone: SaudeIcon, grupo: 'fieis', rota: '/em-breve/saude' },
+  { id: 'sangue', rotulo: 'Sangue', Icone: SangueIcon, grupo: 'fieis', rota: '/em-breve/sangue' },
+  { id: 'cestas-basicas', rotulo: 'Cestas básicas', Icone: CestasIcon, grupo: 'fieis', rota: '/cestas' },
+  { id: 'beneficios', rotulo: 'Clube de benefícios', Icone: BeneficiosIcon, grupo: 'fieis', rota: '/beneficios' },
+  { id: 'parceiros', rotulo: 'Entidades parceiras', Icone: ParceirosIcon, grupo: 'fieis', rota: '/parceiros' },
+  { id: 'vagas', rotulo: 'Vagas de emprego', Icone: VagasIcon, grupo: 'fieis', rota: '/vagas' },
+  { id: 'ingles', rotulo: 'Inglês', Icone: InglesIcon, grupo: 'fieis', rota: '/em-breve/ingles' },
+  { id: 'carteira', rotulo: 'Carteira', Icone: CarteiraIcon, grupo: 'fieis', rota: '/em-breve/carteira' },
+  { id: 'ranking', rotulo: 'Ranking', Icone: RankingIcon, grupo: 'fieis', rota: '/em-breve/ranking' },
+  { id: 'perfil', rotulo: 'Perfil', Icone: PerfilIcon, grupo: 'fieis', rota: '/perfil' },
 ]
