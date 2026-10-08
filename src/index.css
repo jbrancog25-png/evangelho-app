@@ -48,6 +48,11 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 button:focus-visible,
 a:focus-visible {
   outline: 2px solid var(--dourado-claro);
