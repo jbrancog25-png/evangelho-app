@@ -4,11 +4,11 @@ import { ChevronRightIcon, CompartilharIcon, LouvoresIcon, PhotoIcon } from '../
 import logo from '../assets/vida-em-cristo.jpg'
 import { atalhosExplorar, usuario, versiculoDia as versiculoFallback, campanhas as campanhasFallback } from '../data/home'
 import type { AtalhoExplorar, AtalhoGrupo, Campanha as CampanhaMock } from '../data/home'
-import { igrejasSeguidas } from '../data/igrejas'
+import type { IgrejaSeguida } from '../data/igrejas'
 import IgrejasSeguidas from '../components/IgrejasSeguidas'
 import { useAuth } from '../hooks/useAuth'
 import { supabase } from '../lib/supabase'
-import type { Campanha as CampanhaDb, Versiculo } from '../lib/tipos'
+import { DIAS_SEMANA, type Campanha as CampanhaDb, type Versiculo } from '../lib/tipos'
 import './HomeScreen.css'
 
 /** Acima de 9.999 usa separador de milhar; abaixo disso fica como no painel: "1240 pontos". */
@@ -32,6 +32,7 @@ export default function HomeScreen() {
 
   const [versiculo, setVersiculo] = useState<{ texto: string; referencia: string }>(versiculoFallback)
   const [campanhasExib, setCampanhasExib] = useState<CampanhaExibida[]>(campanhasFallback)
+  const [igrejasReais, setIgrejasReais] = useState<IgrejaSeguida[]>([])
 
   useEffect(() => {
     if (!logado) return
@@ -63,7 +64,11 @@ export default function HomeScreen() {
           )
         }
       })
-  }, [logado])
+
+    if (profile) {
+      carregarIgrejasSeguidas(profile.id).then(setIgrejasReais)
+    }
+  }, [logado, profile])
 
   return (
     <div className="home">
@@ -139,7 +144,7 @@ export default function HomeScreen() {
         <ChevronRightIcon className="louvores__seta" />
       </button>
 
-      <IgrejasSeguidas igrejas={igrejasSeguidas} />
+      <IgrejasSeguidas igrejas={logado ? igrejasReais : []} />
 
       <section className="home__secao" aria-labelledby="titulo-campanhas">
         <h2 id="titulo-campanhas" className="home__secao-titulo">
@@ -182,6 +187,64 @@ export default function HomeScreen() {
       </section>
     </div>
   )
+}
+
+async function carregarIgrejasSeguidas(fielId: string): Promise<IgrejaSeguida[]> {
+  const { data: segues } = await supabase
+    .from('fiel_segue')
+    .select('igreja_id')
+    .eq('fiel_id', fielId)
+
+  const ids = (segues ?? []).map((s) => s.igreja_id)
+  if (ids.length === 0) return []
+
+  const { data: igrejas } = await supabase
+    .from('igrejas')
+    .select('*')
+    .in('id', ids)
+    .eq('status', 'aprovada')
+
+  if (!igrejas || igrejas.length === 0) return []
+
+  const enriquecidas = await Promise.all(
+    igrejas.map(async (ig) => {
+      const [palavraRes, cultoRes, pedidosRes, vinculoRes] = await Promise.all([
+        supabase.from('palavras').select('texto').eq('igreja_id', ig.id).eq('publicada', true)
+          .order('criada_em', { ascending: false }).limit(1).maybeSingle(),
+        supabase.from('cultos').select('dia_semana, hora, local').eq('igreja_id', ig.id).eq('ativo', true)
+          .order('dia_semana').limit(1).maybeSingle(),
+        supabase.from('pedidos_oracao').select('id', { count: 'exact', head: true })
+          .eq('igreja_id', ig.id).eq('publicado', true).eq('arquivado', false),
+        supabase.from('pastor_igrejas').select('pastor_id').eq('igreja_id', ig.id).limit(1).maybeSingle(),
+      ])
+
+      let nomePastor = 'Pastor responsável'
+      if (vinculoRes.data?.pastor_id) {
+        const { data: perfilPastor } = await supabase
+          .from('profiles').select('nome').eq('id', vinculoRes.data.pastor_id).maybeSingle()
+        if (perfilPastor?.nome) nomePastor = `Pr. ${perfilPastor.nome}`
+      }
+
+      return {
+        id: ig.id,
+        nome: ig.nome,
+        cidade: `${ig.cidade}, ${ig.estado ?? 'SP'}`,
+        pastor: nomePastor,
+        palavra: palavraRes.data?.texto ?? 'Em breve a palavra desta semana.',
+        proximoCulto: cultoRes.data
+          ? {
+              diaSemana: DIAS_SEMANA[cultoRes.data.dia_semana],
+              hora: cultoRes.data.hora.slice(0, 5),
+              local: cultoRes.data.local ?? 'Templo',
+            }
+          : { diaSemana: 'A definir', hora: '—', local: 'Em breve' },
+        pedidosOracao: pedidosRes.count ?? 0,
+        dizimoCta: 'Entregar o dízimo',
+      }
+    }),
+  )
+
+  return enriquecidas
 }
 
 function GrupoExplorar({ titulo, itens }: { titulo: string; itens: AtalhoExplorar[] }) {

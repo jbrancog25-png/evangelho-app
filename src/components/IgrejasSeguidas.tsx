@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import type { IgrejaSeguida } from '../data/igrejas'
 import { ChevronRightIcon } from './Icons'
 import './IgrejasSeguidas.css'
@@ -13,7 +14,7 @@ export default function IgrejasSeguidas({ igrejas }: Props) {
         <h2 id="titulo-igrejas" className="home__secao-titulo">
           Sua igreja
         </h2>
-        <button type="button" className="igrejas__vazio">
+        <Link to="/igrejas" className="igrejas__vazio">
           <span className="igrejas__vazio-texto">
             <span className="igrejas__vazio-titulo">Siga uma igreja</span>
             <span className="igrejas__vazio-subtitulo">
@@ -21,7 +22,7 @@ export default function IgrejasSeguidas({ igrejas }: Props) {
             </span>
           </span>
           <ChevronRightIcon className="igrejas__vazio-seta" />
-        </button>
+        </Link>
       </section>
     )
   }
@@ -78,6 +79,10 @@ export default function IgrejasSeguidas({ igrejas }: Props) {
           </li>
         ))}
       </ul>
+
+      <Link to="/igrejas" className="igrejas__descobrir">
+        + Descobrir outras igrejas
+      </Link>
     </section>
   )
 }

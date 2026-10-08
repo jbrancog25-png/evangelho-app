@@ -89,7 +89,7 @@ export type AtalhoExplorar = {
 }
 
 export const atalhosExplorar: AtalhoExplorar[] = [
-  { id: 'cultos', rotulo: 'Cultos', Icone: CultosIcon, grupo: 'igreja', rota: '/em-breve/cultos' },
+  { id: 'cultos', rotulo: 'Cultos', Icone: CultosIcon, grupo: 'igreja', rota: '/cultos' },
   { id: 'biblia', rotulo: 'Bíblia', Icone: BibliaIcon, grupo: 'igreja', rota: '/biblia' },
   { id: 'louvores', rotulo: 'Louvores', Icone: LouvoresIcon, grupo: 'igreja', rota: '/louvores' },
   { id: 'dizimo', rotulo: 'Dízimo e ofertas', Icone: DizimoIcon, grupo: 'igreja', rota: '/em-breve/dizimo' },

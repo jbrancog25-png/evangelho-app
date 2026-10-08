@@ -37,6 +37,8 @@ import FielCarteira from './routes/FielCarteira'
 import FielRanking from './routes/FielRanking'
 import FielBiblia from './routes/FielBiblia'
 import FielIngles from './routes/FielIngles'
+import FielIgrejas from './routes/FielIgrejas'
+import FielCultos from './routes/FielCultos'
 import Perfil from './routes/Perfil'
 import EmBreve from './routes/EmBreve'
 import SemConfiguracao from './routes/SemConfiguracao'
@@ -231,6 +233,22 @@ export default function App() {
                 element={
                   <RotaProtegida>
                     <FielIngles />
+                  </RotaProtegida>
+                }
+              />
+              <Route
+                path="/igrejas"
+                element={
+                  <RotaProtegida>
+                    <FielIgrejas />
+                  </RotaProtegida>
+                }
+              />
+              <Route
+                path="/cultos"
+                element={
+                  <RotaProtegida>
+                    <FielCultos />
                   </RotaProtegida>
                 }
               />
