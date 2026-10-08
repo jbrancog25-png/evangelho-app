@@ -103,15 +103,15 @@ export default function HomeScreen() {
         </Link>
       )}
 
-      <section className="card card--saldo" aria-label="Seu saldo">
+      <Link to="/carteira" className="card card--saldo" aria-label="Seu saldo">
         <div className="saldo__info">
           <p className="saldo__rotulo">Seu saldo</p>
-          <p className="saldo__valor">{formatarPontos(usuario.saldoPontos)} pontos</p>
+          <p className="saldo__valor">
+            {formatarPontos(profile?.pontos ?? usuario.saldoPontos)} pontos
+          </p>
         </div>
-        <button type="button" className="botao botao--primario">
-          Carteira
-        </button>
-      </section>
+        <span className="botao botao--primario">Carteira</span>
+      </Link>
 
       <section className="card versiculo" aria-labelledby="titulo-versiculo">
         <div className="versiculo__topo">

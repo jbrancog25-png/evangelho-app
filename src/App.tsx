@@ -17,6 +17,9 @@ import AdminCursos from './routes/AdminCursos'
 import AdminParceiros from './routes/AdminParceiros'
 import AdminCestas from './routes/AdminCestas'
 import AdminBeneficios from './routes/AdminBeneficios'
+import AdminLouvores from './routes/AdminLouvores'
+import AdminSangue from './routes/AdminSangue'
+import AdminDesapegos from './routes/AdminDesapegos'
 import PastorNovaIgreja from './routes/PastorNovaIgreja'
 import PastorDashboard from './routes/PastorDashboard'
 import PastorIgreja from './routes/PastorIgreja'
@@ -26,6 +29,14 @@ import FielCursos from './routes/FielCursos'
 import FielParceiros from './routes/FielParceiros'
 import FielCestas from './routes/FielCestas'
 import FielBeneficios from './routes/FielBeneficios'
+import FielAtividade from './routes/FielAtividade'
+import FielLouvores from './routes/FielLouvores'
+import FielSangue from './routes/FielSangue'
+import FielDesapego from './routes/FielDesapego'
+import FielCarteira from './routes/FielCarteira'
+import FielRanking from './routes/FielRanking'
+import FielBiblia from './routes/FielBiblia'
+import FielIngles from './routes/FielIngles'
 import Perfil from './routes/Perfil'
 import EmBreve from './routes/EmBreve'
 import SemConfiguracao from './routes/SemConfiguracao'
@@ -98,6 +109,9 @@ export default function App() {
                 <Route path="parceiros" element={<AdminParceiros />} />
                 <Route path="cestas" element={<AdminCestas />} />
                 <Route path="beneficios" element={<AdminBeneficios />} />
+                <Route path="louvores" element={<AdminLouvores />} />
+                <Route path="sangue" element={<AdminSangue />} />
+                <Route path="desapegos" element={<AdminDesapegos />} />
               </Route>
 
               <Route
@@ -153,6 +167,70 @@ export default function App() {
                 element={
                   <RotaProtegida>
                     <Perfil />
+                  </RotaProtegida>
+                }
+              />
+              <Route
+                path="/atividade/:categoria"
+                element={
+                  <RotaProtegida>
+                    <FielAtividade />
+                  </RotaProtegida>
+                }
+              />
+              <Route
+                path="/louvores"
+                element={
+                  <RotaProtegida>
+                    <FielLouvores />
+                  </RotaProtegida>
+                }
+              />
+              <Route
+                path="/sangue"
+                element={
+                  <RotaProtegida>
+                    <FielSangue />
+                  </RotaProtegida>
+                }
+              />
+              <Route
+                path="/desapego"
+                element={
+                  <RotaProtegida>
+                    <FielDesapego />
+                  </RotaProtegida>
+                }
+              />
+              <Route
+                path="/carteira"
+                element={
+                  <RotaProtegida>
+                    <FielCarteira />
+                  </RotaProtegida>
+                }
+              />
+              <Route
+                path="/ranking"
+                element={
+                  <RotaProtegida>
+                    <FielRanking />
+                  </RotaProtegida>
+                }
+              />
+              <Route
+                path="/biblia"
+                element={
+                  <RotaProtegida>
+                    <FielBiblia />
+                  </RotaProtegida>
+                }
+              />
+              <Route
+                path="/ingles"
+                element={
+                  <RotaProtegida>
+                    <FielIngles />
                   </RotaProtegida>
                 }
               />

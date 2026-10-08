@@ -6,6 +6,7 @@ export type Profile = {
   email: string
   nome: string
   role: UserRole
+  pontos: number
   criado_em: string
 }
 
@@ -189,5 +190,48 @@ export type Beneficio = {
   valido_ate: string | null
   publicado: boolean
   criado_por: string
+  criado_em: string
+}
+
+export type Louvor = {
+  id: string
+  titulo: string
+  artista: string | null
+  url: string
+  imagem_url: string | null
+  duracao_segundos: number | null
+  playlist: string | null
+  publicado: boolean
+  criado_por: string
+  criado_em: string
+}
+
+export type UrgenciaSangue = 'baixa' | 'media' | 'alta' | 'critica'
+
+export type CampanhaSangue = {
+  id: string
+  hospital: string
+  cidade: string
+  estado: string | null
+  tipos_sanguineos: string | null
+  urgencia: UrgenciaSangue
+  descricao: string | null
+  link_agendamento: string | null
+  publicado: boolean
+  criado_por: string
+  criado_em: string
+}
+
+export type Desapego = {
+  id: string
+  titulo: string
+  descricao: string | null
+  categoria: string | null
+  foto_url: string | null
+  cidade: string | null
+  contato: string
+  autor_id: string
+  publicado: boolean
+  disponivel: boolean
   criado_em: string
 }
