@@ -1,21 +1,36 @@
 :root {
-  --fundo-topo: #000000;
-  --fundo-base: #000000;
-  --superficie: #141416;
-  --superficie-elev: #1b1b1e;
-  --borda: rgb(198 163 91 / 18%);
-  --borda-forte: rgb(198 163 91 / 42%);
-  --borda-tracejada: rgb(198 163 91 / 32%);
+  /* A paleta do Evangelho antigo (conex-app/src/theme.ts, "preto"):
+     preto do logo, painéis um degrau acima e o dourado do logo. */
+  --fundo-topo: #0a0a0b;
+  --fundo-base: #0a0a0b;
+  --superficie: #18191b;
+  --superficie-elev: #111113;
+  /* O fio dourado fechado em volta de cada caixa. */
+  --borda: rgb(156 122 34 / 45%);
+  --borda-forte: #9c7a22;
+  --borda-tracejada: rgb(156 122 34 / 70%);
 
-  --dourado: #c6a35b;
-  --dourado-claro: #e2c38a;
-  --dourado-escuro: #8c7232;
-  --verde: #34c77b;
-  --ambar: #c6a35b;
-  --vermelho: #e5342b;
+  --dourado: #d4a72c;
+  --dourado-claro: #e9c45a;
+  --dourado-escuro: #a67c1b;
+  --verde: #7fd6a8;
+  --ambar: #d4a72c;
+  --vermelho: #ff8577;
 
   --txt-forte: #ffffff;
-  --txt-medio: #9a9aa0;
+  --txt-corpo: #dcdde0;
+  --txt-medio: #a9abb0;
+  --txt-fraco: #85878d;
+
+  /* O botão de agir: dourado cheio com texto quase preto (branco some). */
+  --acao-fundo: #d4a72c;
+  --acao-texto: #1a1a1a;
+  --acao-ocupado: #a67c1b;
+  --acao-sombra: 0 6px 14px rgb(212 167 44 / 30%);
+  /* O dourado do avatar e dos ícones em destaque. */
+  --ouro-degrade: linear-gradient(180deg, #f1cf6a 0%, #d4a72c 55%, #a67c1b 100%);
+  /* O fundo dos botões de contorno e das pílulas do Explorar. */
+  --vidro: linear-gradient(180deg, rgb(255 255 255 / 9%) 0%, rgb(255 255 255 / 2%) 100%);
 
   font-family: 'Nunito', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
   color-scheme: dark;

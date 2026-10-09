@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronRightIcon, CompartilharIcon, LouvoresIcon, PhotoIcon } from '../components/Icons'
-import logo from '../assets/vida-em-cristo.jpg'
 import { atalhosExplorar, usuario, versiculoDia as versiculoFallback, campanhas as campanhasFallback } from '../data/home'
 import type { AtalhoExplorar, AtalhoGrupo, Campanha as CampanhaMock } from '../data/home'
 import type { IgrejaSeguida } from '../data/igrejas'
 import IgrejasSeguidas from '../components/IgrejasSeguidas'
+import MarcaIgreja from '../components/MarcaIgreja'
 import { useAuth } from '../hooks/useAuth'
 import { supabase } from '../lib/supabase'
 import { DIAS_SEMANA, type Campanha as CampanhaDb, type Versiculo } from '../lib/tipos'
@@ -72,8 +72,15 @@ export default function HomeScreen() {
 
   return (
     <div className="home">
+      {/* Como no Evangelho antigo: o logo "cortado" — o globo com a pomba e,
+          ao lado, o nome (IGREJA MUNDIAL / VIDA EM CRISTO) na letra do logo.
+          Na margem direita, o crédito do CONEX. */}
       <header className="home__marca">
-        <img className="home__marca-logo" src={logo} alt="Igreja Mundial Vida em Cristo" />
+        <MarcaIgreja />
+        <div className="home__marca-credito">
+          <img src="/assets/icon-192.png" alt="" width={24} height={24} />
+          <span>Projeto Conex</span>
+        </div>
       </header>
 
       <section className="home__saudacao" aria-label="Sua conta">
@@ -89,7 +96,7 @@ export default function HomeScreen() {
             Sair
           </button>
         ) : (
-          <Link to="/entrar" className="home__avisos">
+          <Link to="/entrar" className="home__avisos home__avisos--entrar">
             Entrar
           </Link>
         )}

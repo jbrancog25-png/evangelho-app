@@ -1,6 +1,6 @@
 import { NavLink, Outlet, Link } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
-import logo from '../assets/vida-em-cristo.jpg'
+import MarcaIgreja from '../components/MarcaIgreja'
 import './Admin.css'
 
 export default function Admin() {
@@ -10,7 +10,7 @@ export default function Admin() {
     <div className="admin">
       <header className="admin__topo">
         <Link to="/" className="admin__marca">
-          <img src={logo} alt="" />
+          <MarcaIgreja tamanho="mini" />
           <span>Administração Evangelho</span>
         </Link>
         <div className="admin__usuario">

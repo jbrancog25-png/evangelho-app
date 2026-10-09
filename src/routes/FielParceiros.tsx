@@ -25,7 +25,7 @@ export default function FielParceiros() {
   return (
     <div className="feed">
       <header className="feed__topo">
-        <Link to="/" className="feed__voltar">← Voltar</Link>
+        <Link to="/" className="feed__voltar" aria-label="Voltar">‹</Link>
         <h1 className="feed__titulo">Entidades parceiras</h1>
       </header>
 

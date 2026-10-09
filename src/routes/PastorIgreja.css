@@ -1,24 +1,27 @@
 .palavra__texto {
-  font-size: 14.5px;
-  line-height: 1.45;
-  color: var(--txt-forte);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--txt-corpo);
   white-space: pre-wrap;
 }
 
 .auth__campo textarea,
 .auth__campo select {
-  padding: 14px 16px;
+  padding: 15px 16px;
   border: 1px solid var(--borda-forte);
-  border-radius: 12px;
+  border-radius: 16px;
   background: var(--superficie);
   color: var(--txt-forte);
   font: inherit;
   font-size: 16px;
+  font-weight: 700;
   resize: vertical;
 }
 
 .auth__campo textarea:focus,
 .auth__campo select:focus {
-  outline: 2px solid var(--dourado-claro);
-  outline-offset: 2px;
+  outline: none;
+  border-color: var(--dourado);
+  box-shadow: 0 0 0 1px var(--dourado);
 }

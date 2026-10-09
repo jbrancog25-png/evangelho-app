@@ -56,7 +56,7 @@ export default function PastorNovaIgreja() {
 
   return (
     <div className="auth">
-      <Link to="/" className="auth__voltar">← Voltar</Link>
+      <Link to="/" className="auth__voltar">‹ Voltar ao início</Link>
       <h1 className="auth__titulo">Cadastrar nova igreja</h1>
       <p className="auth__subtitulo">
         O cadastro vai para aprovação da administração antes de aparecer no app.

@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import logo from '../assets/vida-em-cristo.jpg'
+import MarcaIgreja from '../components/MarcaIgreja'
 import './Feed.css'
 
 const TITULOS: Record<string, string> = {
@@ -32,12 +32,12 @@ export default function EmBreve() {
   return (
     <div className="feed">
       <header className="feed__topo">
-        <Link to="/" className="feed__voltar">← Voltar</Link>
+        <Link to="/" className="feed__voltar" aria-label="Voltar">‹</Link>
         <h1 className="feed__titulo">{titulo}</h1>
       </header>
 
       <div className="em-breve">
-        <img src={logo} alt="" className="em-breve__logo" />
+        <MarcaIgreja tamanho="painel" />
         <h2 className="em-breve__titulo">Em construção</h2>
         <p className="em-breve__texto">
           Essa área está sendo preparada com muito carinho pela equipe do Evangelho.

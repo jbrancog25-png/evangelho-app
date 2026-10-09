@@ -122,8 +122,8 @@ export default function FielBiblia() {
     return (
       <div className="feed">
         <header className="feed__topo">
-          <button type="button" className="feed__voltar" onClick={() => setCapitulo(null)}>
-            ← Capítulos
+          <button type="button" className="feed__voltar" aria-label="Voltar aos capítulos" onClick={() => setCapitulo(null)}>
+            ‹
           </button>
           <h1 className="feed__titulo">{livro.nome} {capitulo}</h1>
         </header>
@@ -157,8 +157,8 @@ export default function FielBiblia() {
     return (
       <div className="feed">
         <header className="feed__topo">
-          <button type="button" className="feed__voltar" onClick={() => setLivro(null)}>
-            ← Livros
+          <button type="button" className="feed__voltar" aria-label="Voltar aos livros" onClick={() => setLivro(null)}>
+            ‹
           </button>
           <h1 className="feed__titulo">{livro.nome}</h1>
         </header>
@@ -183,7 +183,7 @@ export default function FielBiblia() {
   return (
     <div className="feed">
       <header className="feed__topo">
-        <Link to="/" className="feed__voltar">← Voltar</Link>
+        <Link to="/" className="feed__voltar" aria-label="Voltar">‹</Link>
         <h1 className="feed__titulo">Bíblia</h1>
       </header>
 

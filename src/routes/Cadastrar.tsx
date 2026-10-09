@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
-import logo from '../assets/vida-em-cristo.jpg'
+import MarcaIgreja from '../components/MarcaIgreja'
 import './Autenticacao.css'
 
 export default function Cadastrar() {
@@ -39,8 +39,10 @@ export default function Cadastrar() {
 
   return (
     <div className="auth">
-      <Link to="/" className="auth__voltar">← Voltar</Link>
-      <img className="auth__logo" src={logo} alt="Igreja Mundial Vida em Cristo" />
+      <Link to="/" className="auth__voltar">‹ Voltar ao início</Link>
+      <div className="auth__marca">
+        <MarcaIgreja tamanho="painel" />
+      </div>
       <h1 className="auth__titulo">Cadastro</h1>
       <p className="auth__subtitulo">Crie sua conta de fiel. Pastores recebem acesso pela administração.</p>
 

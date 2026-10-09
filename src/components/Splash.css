@@ -1,227 +1,170 @@
-.splash {
+/*
+ * A abertura do Evangelho, copiada do Evangelho antigo
+ * (conex-app/src/evangelho/Abertura.tsx). Linha do tempo (3,6 s):
+ *
+ *   0,0 – 1,9  o globo vem do fundo girando uma volta e meia e assenta
+ *   0,3 – 1,9  o halo dourado acende atrás dele
+ *   1,2 – 2,1  o nome sobe, dobrando como uma placa que se levanta
+ *   2,1 – 2,8  o brilho atravessa o globo e o nome
+ *   3,0 – 3,6  a cena cresce um pouco e some, deixando o Início
+ *
+ * As durações em ms (3600, 1900, 320) têm de bater com Splash.tsx.
+ */
+.abx {
   position: fixed;
   inset: 0;
   z-index: 1000;
-  display: grid;
-  place-items: center;
+  background: radial-gradient(120% 80% at 50% 38%, #26272B 0%, #0B0B0C 62%, #000 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  background: #000000;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.abx.abx-on { animation: abx-sumir 3600ms ease-in forwards; }
+.abx.abx-calma.abx-on { animation: abx-sumir 1900ms ease-in forwards; }
+.abx.abx-sai { animation: abx-pular 320ms ease-in forwards; }
+
+.abx-cena {
+  width: min(78vw, 310px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
   perspective: 900px;
-  perspective-origin: 50% 50%;
-  transition: opacity 420ms ease-out;
+  perspective-origin: 50% 40%;
 }
+.abx-on .abx-cena { animation: abx-afastar 3600ms ease-in forwards; }
 
-.splash--saindo {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* ---------- Halo dourado pulsante atrás da logo ---------- */
-
-.splash__halo {
+/* Centrado no globo: o miolo do halo cai a ~30% da altura da cena. */
+.abx-halo {
+  --lado: min(110vw, 440px);
   position: absolute;
-  width: 120vmin;
-  height: 120vmin;
+  left: 50%;
+  top: 30%;
+  width: var(--lado);
+  height: var(--lado);
+  margin: calc(var(--lado) / -2) 0 0 calc(var(--lado) / -2);
   border-radius: 50%;
-  background:
-    radial-gradient(circle at 50% 50%,
-      rgb(226 195 138 / 55%) 0%,
-      rgb(198 163 91 / 35%) 18%,
-      rgb(140 114 50 / 15%) 38%,
-      transparent 60%);
-  filter: blur(20px);
-  transform: translateZ(-200px) scale(0.4);
+  background: radial-gradient(circle, rgba(212,167,44,0.34) 0%, rgba(212,167,44,0.10) 38%, transparent 68%);
   opacity: 0;
-  animation: halo-entra 2.2s cubic-bezier(0.2, 0.9, 0.25, 1) both;
   pointer-events: none;
 }
+.abx-on .abx-halo { animation: abx-halo 3600ms ease-out forwards; }
 
-/* ---------- Partículas de ouro ao redor ---------- */
+.abx-globo {
+  position: relative;
+  width: 88%;
+  aspect-ratio: 820 / 655;
+  transform-style: preserve-3d;
+  opacity: 0;
+}
+.abx-on .abx-globo { animation: abx-giro 3600ms cubic-bezier(.22,.8,.26,1) forwards; }
 
-.splash__particulas {
+.abx-camada {
   position: absolute;
   inset: 0;
-  pointer-events: none;
-}
-
-.splash__particulas span {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--dourado-claro, #e2c38a);
-  box-shadow: 0 0 8px rgb(226 195 138 / 80%);
-  opacity: 0;
-  animation: particula 2.6s ease-out both;
-}
-
-.splash__particulas span:nth-child(1)  { left: 18%; top: 22%; animation-delay: 0.3s; }
-.splash__particulas span:nth-child(2)  { left: 82%; top: 28%; animation-delay: 0.5s; }
-.splash__particulas span:nth-child(3)  { left: 12%; top: 68%; animation-delay: 0.7s; }
-.splash__particulas span:nth-child(4)  { left: 88%; top: 72%; animation-delay: 0.4s; }
-.splash__particulas span:nth-child(5)  { left: 50%; top: 15%; animation-delay: 0.8s; }
-.splash__particulas span:nth-child(6)  { left: 30%; top: 85%; animation-delay: 0.6s; }
-.splash__particulas span:nth-child(7)  { left: 70%; top: 82%; animation-delay: 0.9s; }
-.splash__particulas span:nth-child(8)  { left: 8%;  top: 48%; animation-delay: 1.1s; }
-.splash__particulas span:nth-child(9)  { left: 92%; top: 52%; animation-delay: 1.0s; }
-.splash__particulas span:nth-child(10) { left: 50%; top: 90%; animation-delay: 1.2s; }
-
-/* ---------- Palco 3D e logo ---------- */
-
-.splash__palco {
-  position: relative;
-  width: min(78vmin, 360px);
-  aspect-ratio: 1;
-  transform-style: preserve-3d;
-  animation: palco-entra 2.4s cubic-bezier(0.22, 1, 0.3, 1) both;
-}
-
-.splash__logo {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  /* mix-blend-mode: screen deixa o preto do JPG sumir sobre o fundo preto do splash;
-     o dourado da logo soma-se ao fundo e aparece como está. */
-  mix-blend-mode: screen;
-  filter:
-    drop-shadow(0 0 24px rgb(226 195 138 / 55%))
-    drop-shadow(0 10px 60px rgb(198 163 91 / 45%));
-  animation: logo-brilho 2.4s cubic-bezier(0.22, 1, 0.3, 1) both;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
-/* Faixa de brilho que atravessa a logo (reflexo metálico). */
-.splash__brilho {
+/* A espessura só serve enquanto a peça gira. Parada de frente, ela
+   apareceria de leve pelo "oceano" do globo, que é transparente. */
+.abx-on .abx-lado { animation: abx-lado 3600ms linear forwards; }
+
+.abx-texto {
+  position: relative;
+  width: 100%;
+  margin-top: 4%;
+  transform-origin: 50% 0%;
+  opacity: 0;
+}
+.abx-texto img { display: block; width: 100%; height: auto; }
+.abx-on .abx-texto { animation: abx-placa 3600ms cubic-bezier(.2,.9,.3,1.15) forwards; }
+
+/* O brilho: uma faixa clara que corre por cima, recortada no formato do
+   ouro pela máscara (a própria imagem) — por isso ela não vaza no fundo. */
+.abx-brilho {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    110deg,
-    transparent 0%,
-    transparent 38%,
-    rgb(255 240 190 / 85%) 48%,
-    rgb(255 255 255 / 95%) 50%,
-    rgb(255 240 190 / 85%) 52%,
-    transparent 62%,
-    transparent 100%
-  );
-  background-size: 260% 100%;
-  background-position: -80% 0%;
-  mix-blend-mode: overlay;
-  opacity: 0;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  background: linear-gradient(105deg, transparent 38%, rgba(255,248,220,0.9) 50%, transparent 62%) no-repeat;
+  background-size: 300% 100%;
+  background-position: 150% 0;
+  mix-blend-mode: screen;
   pointer-events: none;
-  animation: brilho-passa 1.1s cubic-bezier(0.4, 0, 0.3, 1) 0.9s both;
+  transform: translateZ(0.5px);
+}
+.abx-on .abx-brilho { animation: abx-brilho 3600ms linear forwards; }
+.abx-on .abx-brilho-texto { animation-name: abx-brilho-texto; }
+
+/* O crédito do CONEX: parado, centrado embaixo, bem menor que o logo. */
+.abx-credito {
+  position: absolute;
+  bottom: calc(30px + env(safe-area-inset-bottom, 0px));
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font: 700 13px 'Nunito', -apple-system, system-ui, sans-serif;
+  letter-spacing: 0.3px;
+  color: rgba(255,255,255,0.62);
+  pointer-events: none;
+}
+.abx-credito img { width: 22px; height: 22px; border-radius: 6px; display: block; }
+.abx-credito b { font-weight: 900; color: rgba(255,255,255,0.85); }
+
+@keyframes abx-giro {
+  0%   { opacity: 0; transform: translateZ(-420px) rotateX(18deg) rotateY(-540deg) scale(.6); }
+  8%   { opacity: 1; }
+  44%  { transform: translateZ(0) rotateX(-4deg) rotateY(14deg) scale(1.04); }
+  53%  { transform: translateZ(0) rotateX(0) rotateY(-5deg) scale(1); }
+  60%, 100% { opacity: 1; transform: translateZ(0) rotateX(0) rotateY(0) scale(1); }
+}
+@keyframes abx-lado {
+  0%, 52% { opacity: 1; }
+  64%, 100% { opacity: 0; }
+}
+@keyframes abx-halo {
+  0%, 8% { opacity: 0; transform: scale(.5); }
+  53%    { opacity: 1; transform: scale(1); }
+  70%    { opacity: .85; transform: scale(1.04); }
+  100%   { opacity: 1; transform: scale(1); }
+}
+@keyframes abx-placa {
+  0%, 33% { opacity: 0; transform: translateY(26px) rotateX(-95deg); }
+  45%     { opacity: 1; }
+  58%, 100% { opacity: 1; transform: translateY(0) rotateX(0); }
+}
+@keyframes abx-brilho {
+  0%, 58% { background-position: 150% 0; }
+  74%, 100% { background-position: -50% 0; }
+}
+@keyframes abx-brilho-texto {
+  0%, 62% { background-position: 150% 0; }
+  78%, 100% { background-position: -50% 0; }
+}
+@keyframes abx-afastar {
+  0%, 83% { transform: scale(1); }
+  100%    { transform: scale(1.08); }
+}
+@keyframes abx-sumir {
+  0%, 83% { opacity: 1; }
+  100%    { opacity: 0; }
+}
+@keyframes abx-pular {
+  from { opacity: 1; }
+  to   { opacity: 0; }
 }
 
-/* ---------- Animações ---------- */
-
-@keyframes palco-entra {
-  0% {
-    transform: translateZ(-600px) rotateY(-85deg) scale(1);
-    opacity: 0;
-  }
-  35% {
-    opacity: 1;
-  }
-  55% {
-    transform: translateZ(0) rotateY(0deg) scale(1);
-  }
-  65% {
-    transform: translateZ(10px) rotateY(0deg) scale(1.03);
-  }
-  80% {
-    transform: translateZ(0) rotateY(0deg) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translateZ(260px) rotateY(0deg) scale(1.35);
-    opacity: 0;
-  }
-}
-
-@keyframes logo-brilho {
-  0% {
-    filter: drop-shadow(0 0 0 rgb(226 195 138 / 0%)) brightness(0.35) contrast(1.15);
-  }
-  40% {
-    filter:
-      drop-shadow(0 0 32px rgb(226 195 138 / 65%))
-      drop-shadow(0 10px 60px rgb(198 163 91 / 55%))
-      brightness(1.1) contrast(1.1);
-  }
-  70% {
-    filter:
-      drop-shadow(0 0 48px rgb(255 240 190 / 85%))
-      drop-shadow(0 14px 80px rgb(226 195 138 / 70%))
-      brightness(1.25) contrast(1.08);
-  }
-  100% {
-    filter:
-      drop-shadow(0 0 24px rgb(226 195 138 / 40%))
-      drop-shadow(0 10px 60px rgb(198 163 91 / 35%))
-      brightness(1.1);
-  }
-}
-
-@keyframes halo-entra {
-  0% {
-    transform: translateZ(-200px) scale(0.3);
-    opacity: 0;
-  }
-  40% {
-    transform: translateZ(-100px) scale(0.9);
-    opacity: 1;
-  }
-  70% {
-    transform: translateZ(-80px) scale(1.05);
-    opacity: 0.95;
-  }
-  100% {
-    transform: translateZ(-50px) scale(1.3);
-    opacity: 0;
-  }
-}
-
-@keyframes brilho-passa {
-  0% {
-    background-position: -80% 0%;
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    background-position: 180% 0%;
-    opacity: 0;
-  }
-}
-
-@keyframes particula {
-  0% {
-    opacity: 0;
-    transform: translate(0, 0) scale(0.4);
-  }
-  40% {
-    opacity: 1;
-    transform: translate(0, -8px) scale(1.1);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(0, -40px) scale(0.6);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .splash__palco,
-  .splash__logo,
-  .splash__brilho,
-  .splash__halo,
-  .splash__particulas span {
-    animation: none;
-  }
-
-  .splash__logo {
-    filter: drop-shadow(0 0 24px rgb(226 195 138 / 40%));
-  }
-}
+/* Reduzir movimento: o logo aparece e some, sem giro, sem brilho correndo. */
+.abx-calma .abx-globo, .abx-calma .abx-texto, .abx-calma .abx-halo { animation: none !important; opacity: 1; transform: none; }
+.abx-calma .abx-brilho { display: none; }
+.abx-calma .abx-cena { animation: none !important; }

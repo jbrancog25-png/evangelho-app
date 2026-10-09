@@ -1,0 +1,37 @@
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+.marca__globo {
+  flex-shrink: 0;
+  width: auto;
+  height: clamp(50px, 16vw, 62px);
+}
+
+.marca__nome {
+  min-width: 0;
+  width: auto;
+  height: clamp(34px, 11.4vw, 45px);
+  object-fit: contain;
+}
+
+/* Na caixa das telas de entrada: centrada e um pouco maior. */
+.marca--painel {
+  justify-content: center;
+}
+
+.marca--painel .marca__globo {
+  height: 68px;
+}
+
+.marca--painel .marca__nome {
+  height: 50px;
+}
+
+.marca--mini .marca__globo {
+  height: 40px;
+}
