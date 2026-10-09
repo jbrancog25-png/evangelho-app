@@ -138,7 +138,7 @@ export default function HomeScreen() {
         <p className="versiculo__referencia">{versiculo.referencia}</p>
       </section>
 
-      <button type="button" className="card card--louvores">
+      <Link to="/louvores" className="card card--louvores">
         <span className="louvores__icone">
           <LouvoresIcon />
         </span>
@@ -149,7 +149,7 @@ export default function HomeScreen() {
           </span>
         </span>
         <ChevronRightIcon className="louvores__seta" />
-      </button>
+      </Link>
 
       <IgrejasSeguidas igrejas={logado ? igrejasReais : []} />
 
