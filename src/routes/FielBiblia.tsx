@@ -88,6 +88,11 @@ export default function FielBiblia() {
   const [carregando, setCarregando] = useState(false)
   const [erro, setErro] = useState<string | null>(null)
 
+  // Livro e capítulo trocam a tela sem trocar o endereço: volta ao alto também.
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [livro, capitulo])
+
   useEffect(() => {
     const hoje = new Date().toISOString().slice(0, 10)
     supabase

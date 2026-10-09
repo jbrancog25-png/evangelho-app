@@ -262,3 +262,43 @@
 .feed__voltar[type="button"] {
   cursor: pointer;
 }
+
+/* ---------- Louvores ---------- */
+
+/* O player vem logo abaixo desta tela (TocadorLouvores, no App): sem altura
+   mínima, para ele não cair para fora da vista. */
+.feed--louvores {
+  min-height: auto;
+  padding-bottom: 16px;
+}
+
+.feed__subtitulo {
+  margin-top: -4px;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--txt-medio);
+}
+
+.louvores__escolha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.louvores__escolha .admin__filtro {
+  flex: 1 1 40%;
+}
+
+.louvores__titulo {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--txt-forte);
+}
+
+.louvores__outros {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 20px 40px;
+}

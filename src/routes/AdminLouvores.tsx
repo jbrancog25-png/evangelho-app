@@ -107,7 +107,8 @@ function FormLouvor({ autorId, onSalvo }: { autorId: string; onSalvo: () => void
     <form onSubmit={submeter} className="auth__form">
       <label className="auth__campo"><span>Título</span><input required value={titulo} onChange={(e) => setTitulo(e.target.value)} /></label>
       <label className="auth__campo"><span>Artista</span><input value={artista} onChange={(e) => setArtista(e.target.value)} /></label>
-      <label className="auth__campo"><span>URL (YouTube, Spotify, etc.)</span><input required value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://…" /></label>
+      <label className="auth__campo"><span>URL (SoundCloud, YouTube, Spotify…)</span><input required value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://…" /></label>
+      <p className="admin__item-meta">Playlist do SoundCloud (link da playlist ou código de "Incorporar") toca no player do app. Outros links aparecem com o botão "Ouvir".</p>
       <label className="auth__campo"><span>Imagem/capa (URL)</span><input value={imagemUrl} onChange={(e) => setImagemUrl(e.target.value)} /></label>
       <label className="auth__campo"><span>Playlist (opcional)</span><input value={playlist} onChange={(e) => setPlaylist(e.target.value)} placeholder="Adoração, Jovem…" /></label>
       {erro && <p className="auth__erro">{erro}</p>}

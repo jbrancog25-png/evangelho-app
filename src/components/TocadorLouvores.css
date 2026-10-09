@@ -1,0 +1,66 @@
+.tocador {
+  padding: 0 20px 40px;
+}
+
+.tocador--escondido {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tocador__quadro {
+  display: block;
+  border: 1px solid var(--borda-forte);
+  border-radius: 16px;
+  background: var(--superficie);
+}
+
+.tocador__credito {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 12.5px;
+}
+
+.tocador__credito a {
+  color: var(--dourado-claro);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.tocador__aviso {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--txt-medio);
+}
+
+/* Tocando em outra tela: um atalho de volta ao player, no canto de baixo. */
+.tocador__atalho {
+  position: fixed;
+  left: 50%;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 50;
+  display: flex;
+  justify-content: flex-end;
+  width: min(100%, 480px);
+  padding: 0 20px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.tocador__atalho-botao {
+  padding: 11px 16px;
+  border-radius: 100px;
+  background: var(--acao-fundo);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 45%);
+  color: var(--acao-texto);
+  font-size: 13.5px;
+  font-weight: 900;
+  text-decoration: none;
+  pointer-events: auto;
+}
