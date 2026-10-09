@@ -10,6 +10,10 @@
   width: 100%;
   max-width: 480px;
   background: var(--fundo-base);
+  /* Empurra o conteúdo abaixo do notch/câmera (iPhone) e evita que o home indicator
+     cubra o rodapé. `viewport-fit=cover` já está no <meta viewport> do index.html. */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 @media (min-width: 520px) {
