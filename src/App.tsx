@@ -3,6 +3,9 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { AuthProvider } from './providers/AuthProvider'
 import RotaProtegida from './components/RotaProtegida'
 import Splash, { deveAbrir } from './components/Splash'
+import TocadorLouvores from './components/TocadorLouvores'
+import VoltarAoTopo from './components/VoltarAoTopo'
+import { TocadorProvider } from './providers/TocadorProvider'
 import HomeScreen from './screens/HomeScreen'
 import Entrar from './routes/Entrar'
 import Cadastrar from './routes/Cadastrar'
@@ -62,212 +65,221 @@ export default function App() {
 
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <div className="app">
-          {mostrarSplash && <Splash onConcluir={fecharSplash} />}
-          <main className="app__tela">
-            <Routes>
-              <Route path="/" element={<HomeScreen />} />
-              <Route path="/entrar" element={<Entrar />} />
-              <Route path="/cadastrar" element={<Cadastrar />} />
-              <Route
-                path="/pastor"
-                element={
-                  <RotaProtegida rolesPermitidas={['pastor', 'super_admin']}>
-                    <PastorDashboard />
-                  </RotaProtegida>
-                }
-              />
-              <Route
-                path="/pastor/nova-igreja"
-                element={
-                  <RotaProtegida rolesPermitidas={['pastor', 'super_admin']}>
-                    <PastorNovaIgreja />
-                  </RotaProtegida>
-                }
-              />
-              <Route
-                path="/pastor/igreja/:id"
-                element={
-                  <RotaProtegida rolesPermitidas={['pastor', 'super_admin']}>
-                    <PastorIgreja />
-                  </RotaProtegida>
-                }
-              />
-              <Route
-                path="/admin"
-                element={
-                  <RotaProtegida rolesPermitidas={['super_admin']}>
-                    <Admin />
-                  </RotaProtegida>
-                }
-              >
-                <Route index element={<Navigate to="igrejas" replace />} />
-                <Route path="igrejas" element={<AdminIgrejas />} />
-                <Route path="pastores" element={<AdminPastores />} />
-                <Route path="eventos" element={<AdminEventos />} />
-                <Route path="campanhas" element={<AdminCampanhas />} />
-                <Route path="vagas" element={<AdminVagas />} />
-                <Route path="versiculos" element={<AdminVersiculos />} />
-                <Route path="cursos" element={<AdminCursos />} />
-                <Route path="parceiros" element={<AdminParceiros />} />
-                <Route path="cestas" element={<AdminCestas />} />
-                <Route path="beneficios" element={<AdminBeneficios />} />
-                <Route path="louvores" element={<AdminLouvores />} />
-                <Route path="sangue" element={<AdminSangue />} />
-                <Route path="desapegos" element={<AdminDesapegos />} />
-              </Route>
+      <TocadorProvider>
+        <BrowserRouter>
+          <VoltarAoTopo />
+          <div className="app">
+            {mostrarSplash && <Splash onConcluir={fecharSplash} />}
+            <main className="app__tela">
+              <Routes>
+                <Route path="/" element={<HomeScreen />} />
+                <Route path="/entrar" element={<Entrar />} />
+                <Route path="/cadastrar" element={<Cadastrar />} />
+                <Route
+                  path="/pastor"
+                  element={
+                    <RotaProtegida rolesPermitidas={['pastor', 'super_admin']}>
+                      <PastorDashboard />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/pastor/nova-igreja"
+                  element={
+                    <RotaProtegida rolesPermitidas={['pastor', 'super_admin']}>
+                      <PastorNovaIgreja />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/pastor/igreja/:id"
+                  element={
+                    <RotaProtegida rolesPermitidas={['pastor', 'super_admin']}>
+                      <PastorIgreja />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/admin"
+                  element={
+                    <RotaProtegida rolesPermitidas={['super_admin']}>
+                      <Admin />
+                    </RotaProtegida>
+                  }
+                >
+                  <Route index element={<Navigate to="igrejas" replace />} />
+                  <Route path="igrejas" element={<AdminIgrejas />} />
+                  <Route path="pastores" element={<AdminPastores />} />
+                  <Route path="eventos" element={<AdminEventos />} />
+                  <Route path="campanhas" element={<AdminCampanhas />} />
+                  <Route path="vagas" element={<AdminVagas />} />
+                  <Route path="versiculos" element={<AdminVersiculos />} />
+                  <Route path="cursos" element={<AdminCursos />} />
+                  <Route path="parceiros" element={<AdminParceiros />} />
+                  <Route path="cestas" element={<AdminCestas />} />
+                  <Route path="beneficios" element={<AdminBeneficios />} />
+                  <Route path="louvores" element={<AdminLouvores />} />
+                  <Route path="sangue" element={<AdminSangue />} />
+                  <Route path="desapegos" element={<AdminDesapegos />} />
+                </Route>
 
-              <Route
-                path="/eventos"
-                element={
-                  <RotaProtegida>
-                    <FielEventos />
-                  </RotaProtegida>
-                }
-              />
-              <Route
-                path="/vagas"
-                element={
-                  <RotaProtegida>
-                    <FielVagas />
-                  </RotaProtegida>
-                }
-              />
-              <Route
-                path="/cursos"
-                element={
-                  <RotaProtegida>
-                    <FielCursos />
-                  </RotaProtegida>
-                }
-              />
-              <Route
-                path="/parceiros"
-                element={
-                  <RotaProtegida>
-                    <FielParceiros />
-                  </RotaProtegida>
-                }
-              />
-              <Route
-                path="/cestas"
-                element={
-                  <RotaProtegida>
-                    <FielCestas />
-                  </RotaProtegida>
-                }
-              />
-              <Route
-                path="/beneficios"
-                element={
-                  <RotaProtegida>
-                    <FielBeneficios />
-                  </RotaProtegida>
-                }
-              />
-              <Route
-                path="/perfil"
-                element={
-                  <RotaProtegida>
-                    <Perfil />
-                  </RotaProtegida>
-                }
-              />
-              <Route
-                path="/atividade/:categoria"
-                element={
-                  <RotaProtegida>
-                    <FielAtividade />
-                  </RotaProtegida>
-                }
-              />
-              <Route
-                path="/louvores"
-                element={
-                  <RotaProtegida>
-                    <FielLouvores />
-                  </RotaProtegida>
-                }
-              />
-              <Route
-                path="/sangue"
-                element={
-                  <RotaProtegida>
-                    <FielSangue />
-                  </RotaProtegida>
-                }
-              />
-              <Route
-                path="/desapego"
-                element={
-                  <RotaProtegida>
-                    <FielDesapego />
-                  </RotaProtegida>
-                }
-              />
-              <Route
-                path="/carteira"
-                element={
-                  <RotaProtegida>
-                    <FielCarteira />
-                  </RotaProtegida>
-                }
-              />
-              <Route
-                path="/ranking"
-                element={
-                  <RotaProtegida>
-                    <FielRanking />
-                  </RotaProtegida>
-                }
-              />
-              <Route
-                path="/biblia"
-                element={
-                  <RotaProtegida>
-                    <FielBiblia />
-                  </RotaProtegida>
-                }
-              />
-              <Route
-                path="/ingles"
-                element={
-                  <RotaProtegida>
-                    <FielIngles />
-                  </RotaProtegida>
-                }
-              />
-              <Route
-                path="/igrejas"
-                element={
-                  <RotaProtegida>
-                    <FielIgrejas />
-                  </RotaProtegida>
-                }
-              />
-              <Route
-                path="/cultos"
-                element={
-                  <RotaProtegida>
-                    <FielCultos />
-                  </RotaProtegida>
-                }
-              />
-              <Route
-                path="/em-breve/:area"
-                element={
-                  <RotaProtegida>
-                    <EmBreve />
-                  </RotaProtegida>
-                }
-              />
+                <Route
+                  path="/eventos"
+                  element={
+                    <RotaProtegida>
+                      <FielEventos />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/vagas"
+                  element={
+                    <RotaProtegida>
+                      <FielVagas />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/cursos"
+                  element={
+                    <RotaProtegida>
+                      <FielCursos />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/parceiros"
+                  element={
+                    <RotaProtegida>
+                      <FielParceiros />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/cestas"
+                  element={
+                    <RotaProtegida>
+                      <FielCestas />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/beneficios"
+                  element={
+                    <RotaProtegida>
+                      <FielBeneficios />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/perfil"
+                  element={
+                    <RotaProtegida>
+                      <Perfil />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/atividade/:categoria"
+                  element={
+                    <RotaProtegida>
+                      <FielAtividade />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/louvores"
+                  element={
+                    <RotaProtegida>
+                      <FielLouvores />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/sangue"
+                  element={
+                    <RotaProtegida>
+                      <FielSangue />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/desapego"
+                  element={
+                    <RotaProtegida>
+                      <FielDesapego />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/carteira"
+                  element={
+                    <RotaProtegida>
+                      <FielCarteira />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/ranking"
+                  element={
+                    <RotaProtegida>
+                      <FielRanking />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/biblia"
+                  element={
+                    <RotaProtegida>
+                      <FielBiblia />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/ingles"
+                  element={
+                    <RotaProtegida>
+                      <FielIngles />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/igrejas"
+                  element={
+                    <RotaProtegida>
+                      <FielIgrejas />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/cultos"
+                  element={
+                    <RotaProtegida>
+                      <FielCultos />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/em-breve/:area"
+                  element={
+                    <RotaProtegida>
+                      <EmBreve />
+                    </RotaProtegida>
+                  }
+                />
 
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </main>
-        </div>
-      </BrowserRouter>
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+
+              {/* O player de louvores vive aqui, fora das rotas, para a música
+                  seguir tocando de uma tela para a outra. */}
+              <TocadorLouvores />
+              {/* Onde a tela de Louvores põe os louvores de outros sites, abaixo do player. */}
+              <div id="depois-do-tocador" />
+            </main>
+          </div>
+        </BrowserRouter>
+      </TocadorProvider>
     </AuthProvider>
   )
 }
