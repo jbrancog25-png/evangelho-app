@@ -2,38 +2,40 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 24px 22px 40px;
+  padding: 20px 24px 40px;
   min-height: 100dvh;
 }
 
 .auth__voltar {
   align-self: flex-start;
-  color: var(--dourado-claro);
+  padding: 4px 0;
+  color: var(--txt-medio);
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 800;
   text-decoration: none;
 }
 
-.auth__logo {
-  width: 180px;
-  margin: 10px auto 0;
-  object-fit: contain;
-  mix-blend-mode: screen;
-  filter: drop-shadow(0 4px 14px rgb(212 167 44 / 30%));
+/* O logo numa caixa, como na entrada do Evangelho antigo. */
+.auth__marca {
+  padding: 16px 18px;
+  border: 1px solid var(--borda-forte);
+  border-radius: 22px;
+  background: var(--superficie);
 }
 
 .auth__titulo {
-  margin-top: 8px;
-  font-size: 26px;
-  font-weight: 800;
+  margin-top: 4px;
+  font-size: 22px;
+  font-weight: 900;
   color: var(--txt-forte);
 }
 
 .auth__subtitulo {
   margin-top: -8px;
-  color: var(--txt-medio);
-  font-size: 14.5px;
-  line-height: 1.4;
+  color: var(--txt-corpo);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
 .auth__form {
@@ -52,59 +54,71 @@
 .auth__campo span {
   font-size: 12px;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.4px;
   text-transform: uppercase;
-  color: var(--dourado);
+  color: var(--txt-medio);
 }
 
 .auth__campo input {
-  padding: 14px 16px;
+  padding: 15px 16px;
   border: 1px solid var(--borda-forte);
-  border-radius: 12px;
+  border-radius: 16px;
   background: var(--superficie);
   color: var(--txt-forte);
   font: inherit;
   font-size: 16px;
+  font-weight: 700;
 }
 
 .auth__campo input:focus {
-  outline: 2px solid var(--dourado-claro);
-  outline-offset: 2px;
+  outline: none;
+  border-color: var(--dourado);
+  box-shadow: 0 0 0 1px var(--dourado);
 }
 
 .auth__erro {
   padding: 12px 14px;
-  border: 1px solid rgb(229 52 43 / 50%);
-  border-radius: 12px;
-  background: rgb(229 52 43 / 10%);
-  color: #ffb6b1;
-  font-size: 14px;
+  border: 1px solid var(--vermelho);
+  border-radius: 14px;
+  background: rgb(255 133 119 / 12%);
+  color: var(--vermelho);
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.5;
 }
 
 .auth__sucesso {
   padding: 12px 14px;
-  border: 1px solid rgb(52 199 123 / 40%);
-  border-radius: 12px;
-  background: rgb(52 199 123 / 10%);
-  color: #a7eac7;
-  font-size: 14px;
+  border: 1px solid var(--verde);
+  border-radius: 14px;
+  background: rgb(127 214 168 / 12%);
+  color: var(--verde);
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.5;
 }
 
 .auth__botao {
   margin-top: 6px;
   width: 100%;
+  padding: 18px;
+  border-radius: 16px;
+  font-size: 17px;
+  font-weight: 800;
 }
 
 .auth__rodape {
   margin-top: 10px;
   text-align: center;
-  font-size: 14.5px;
-  color: var(--txt-medio);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.55;
+  color: var(--txt-corpo);
 }
 
 .auth__rodape a {
   color: var(--dourado-claro);
-  font-weight: 800;
+  font-weight: 900;
   text-decoration: none;
 }
 
@@ -114,6 +128,7 @@
   min-height: 100dvh;
   color: var(--txt-medio);
   font-size: 15px;
+  font-weight: 700;
 }
 
 .config__passos {
@@ -123,11 +138,12 @@
   padding: 16px 18px;
   margin: 0;
   border: 1px solid var(--borda-forte);
-  border-radius: 14px;
+  border-radius: 20px;
   background: var(--superficie);
   list-style: decimal inside;
   color: var(--txt-forte);
-  font-size: 14.5px;
+  font-size: 14px;
+  font-weight: 600;
   line-height: 1.5;
 }
 
@@ -137,7 +153,7 @@
   margin-top: 6px;
   padding: 8px 10px;
   border-radius: 8px;
-  background: #000;
+  background: var(--fundo-base);
   color: var(--dourado-claro);
   font-family: 'JetBrains Mono', 'SF Mono', monospace;
   font-size: 12.5px;

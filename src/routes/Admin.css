@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
-  padding: 18px 20px 40px;
-  gap: 18px;
+  padding: 16px 20px 40px;
+  gap: 16px;
 }
 
 .admin__topo {
@@ -21,33 +21,29 @@
   text-decoration: none;
 }
 
-.admin__marca img {
-  width: 42px;
-  height: 42px;
-  object-fit: contain;
-  mix-blend-mode: screen;
-}
+
 
 .admin__marca span {
   font-size: 15px;
-  font-weight: 800;
-  letter-spacing: 0.03em;
+  font-weight: 900;
 }
 
 .admin__usuario {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 13px;
+  font-size: 12.5px;
+  font-weight: 700;
   color: var(--txt-medio);
 }
 
 .admin__nav {
+  /* As abas, como o "Entrar | Criar conta" do Evangelho antigo. */
   display: flex;
-  gap: 6px;
+  gap: 4px;
   padding: 4px;
   border: 1px solid var(--borda-forte);
-  border-radius: 12px;
+  border-radius: 100px;
   background: var(--superficie);
   overflow-x: auto;
   scrollbar-width: none;
@@ -58,8 +54,11 @@
 .admin__nav-item {
   flex: 1 1 auto;
   padding: 10px 14px;
-  border-radius: 10px;
+  border: 0;
+  border-radius: 100px;
+  background: transparent;
   text-align: center;
+  white-space: nowrap;
   font-size: 14px;
   font-weight: 800;
   color: var(--txt-medio);
@@ -67,8 +66,8 @@
 }
 
 .admin__nav-item.active {
-  background: linear-gradient(140deg, var(--dourado-claro), var(--dourado) 70%, var(--dourado-escuro));
-  color: #1a1a1a;
+  background: var(--acao-fundo);
+  color: var(--acao-texto);
 }
 
 .admin__main {
@@ -79,7 +78,7 @@
 
 .admin__secao-titulo {
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 900;
   color: var(--txt-forte);
 }
 
@@ -95,19 +94,20 @@
 
 .admin__filtro {
   flex: 0 0 auto;
-  padding: 8px 14px;
+  padding: 9px 14px;
   border: 1px solid var(--borda-forte);
-  border-radius: 999px;
+  border-radius: 12px;
   background: transparent;
   color: var(--txt-forte);
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 13.5px;
+  font-weight: 800;
 }
 
 .admin__filtro--ativo {
-  background: linear-gradient(140deg, var(--dourado-claro), var(--dourado) 70%, var(--dourado-escuro));
-  color: #1a1a1a;
-  border-color: transparent;
+  /* A escolha marcada do Evangelho antigo: fio e texto dourados. */
+  border-color: var(--dourado);
+  background: rgb(212 167 44 / 16%);
+  color: var(--dourado-claro);
 }
 
 .admin__lista {
@@ -120,9 +120,9 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 14px 16px;
+  padding: 16px 18px;
   border: 1px solid var(--borda-forte);
-  border-radius: 14px;
+  border-radius: 20px;
   background: var(--superficie);
 }
 
@@ -135,13 +135,14 @@
 
 .admin__item-nome {
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 900;
   color: var(--txt-forte);
 }
 
 .admin__item-meta {
   margin-top: 2px;
   font-size: 13px;
+  font-weight: 600;
   color: var(--txt-medio);
 }
 
@@ -156,18 +157,18 @@
 }
 
 .admin__badge--pendente {
-  background: rgb(240 169 27 / 18%);
-  color: #f0c866;
+  background: rgb(212 167 44 / 16%);
+  color: var(--dourado-claro);
 }
 
 .admin__badge--aprovada {
-  background: rgb(52 199 123 / 18%);
-  color: #7cdba8;
+  background: rgb(127 214 168 / 14%);
+  color: var(--verde);
 }
 
 .admin__badge--rejeitada {
-  background: rgb(229 52 43 / 18%);
-  color: #ffb6b1;
+  background: rgb(255 133 119 / 14%);
+  color: var(--vermelho);
 }
 
 .admin__item-acoes {
@@ -183,17 +184,20 @@
 }
 
 .admin__vazio {
-  padding: 24px 16px;
+  padding: 18px 20px;
   border: 1px dashed var(--borda-forte);
   border-radius: 14px;
+  background: var(--superficie);
   text-align: center;
   color: var(--txt-medio);
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .admin__em-breve {
   padding: 40px 20px;
   text-align: center;
   color: var(--txt-medio);
-  font-size: 14px;
+  font-size: 13.5px;
+  font-weight: 700;
 }

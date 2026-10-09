@@ -59,7 +59,7 @@ export default function FielIgrejas() {
   return (
     <div className="feed">
       <header className="feed__topo">
-        <Link to="/" className="feed__voltar">← Voltar</Link>
+        <Link to="/" className="feed__voltar" aria-label="Voltar">‹</Link>
         <h1 className="feed__titulo">Igrejas</h1>
       </header>
 

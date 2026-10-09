@@ -9,12 +9,10 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  padding: 18px;
+  padding: 18px 20px;
   border: 1px solid var(--borda-forte);
-  border-radius: 18px;
-  background:
-    linear-gradient(180deg, rgb(212 167 44 / 10%), transparent 55%),
-    var(--superficie);
+  border-radius: 20px;
+  background: var(--superficie);
 }
 
 .igreja__cabecalho {
@@ -29,15 +27,16 @@
 }
 
 .igreja__nome {
-  font-size: 17px;
-  font-weight: 800;
+  font-size: 16px;
+  font-weight: 900;
   line-height: 1.2;
   color: var(--txt-forte);
 }
 
 .igreja__pastor {
-  margin-top: 4px;
-  font-size: 13px;
+  margin-top: 3px;
+  font-size: 12.5px;
+  font-weight: 700;
   color: var(--txt-medio);
 }
 
@@ -45,21 +44,22 @@
   position: relative;
   padding: 12px 14px;
   border-left: 3px solid var(--dourado);
-  border-radius: 0 10px 10px 0;
-  background: rgb(212 167 44 / 6%);
-  font-size: 14.5px;
-  line-height: 1.45;
-  color: var(--txt-forte);
+  border-radius: 0 12px 12px 0;
+  background: rgb(212 167 44 / 8%);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--txt-corpo);
 }
 
 .igreja__palavra-rotulo {
   display: block;
   margin-bottom: 4px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.4px;
   text-transform: uppercase;
-  color: var(--dourado);
+  color: var(--txt-medio);
 }
 
 .igreja__detalhes {
@@ -76,25 +76,25 @@
 }
 
 .igreja__detalhe dt {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.4px;
   text-transform: uppercase;
-  color: var(--dourado);
+  color: var(--txt-medio);
 }
 
 .igreja__detalhe dd {
-  font-size: 14.5px;
-  font-weight: 700;
-  color: var(--txt-forte);
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--dourado-claro);
 }
 
 .igreja__detalhe-local {
   display: block;
   margin-top: 2px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--txt-medio);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--txt-corpo);
 }
 
 .igreja__link {
@@ -105,8 +105,8 @@
   border: 0;
   background: transparent;
   color: var(--dourado-claro);
-  font-size: 14.5px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 800;
 }
 
 .igreja__link-seta {
@@ -123,7 +123,7 @@
 .igreja__acoes .botao {
   flex: 1 1 140px;
   padding: 12px 16px;
-  font-size: 15px;
+  font-size: 14.5px;
   text-align: center;
 }
 
@@ -133,10 +133,10 @@
   gap: 12px;
   width: calc(100% - (2 * var(--gutter)));
   margin: 0 var(--gutter);
-  padding: 18px;
+  padding: 18px 20px;
   border: 1px dashed var(--borda-forte);
-  border-radius: 18px;
-  background: transparent;
+  border-radius: 14px;
+  background: var(--superficie);
   color: inherit;
   text-align: left;
 }
@@ -150,31 +150,33 @@
 }
 
 .igrejas__vazio-titulo {
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--dourado-claro);
+  font-size: 14.5px;
+  font-weight: 900;
+  color: var(--txt-forte);
 }
 
 .igrejas__vazio-subtitulo {
-  font-size: 13.5px;
-  line-height: 1.35;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.4;
   color: var(--txt-medio);
 }
 
 .igrejas__vazio-seta {
-  width: 20px;
-  height: 20px;
-  color: var(--dourado);
+  width: 18px;
+  height: 18px;
+  color: var(--txt-fraco);
 }
 
 .igrejas__descobrir {
   align-self: center;
   margin: 4px var(--gutter) 0;
-  padding: 10px 18px;
-  border: 1px dashed var(--borda-forte);
-  border-radius: 999px;
-  color: var(--dourado-claro);
-  font-size: 13.5px;
-  font-weight: 700;
+  padding: 10px 16px;
+  border: 1px solid var(--borda-forte);
+  border-radius: 12px;
+  background: var(--vidro);
+  color: var(--txt-forte);
+  font-size: 13px;
+  font-weight: 800;
   text-align: center;
 }

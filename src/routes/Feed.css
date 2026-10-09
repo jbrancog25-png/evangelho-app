@@ -1,8 +1,8 @@
 .feed {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 20px 20px 40px;
+  gap: 12px;
+  padding: 16px 20px 40px;
   min-height: 100dvh;
 }
 
@@ -10,18 +10,30 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  margin-bottom: 6px;
 }
 
 .feed__voltar {
-  color: var(--dourado-claro);
-  font-size: 14px;
-  font-weight: 700;
+  /* O botão de voltar do Evangelho antigo: quadrado, com fio dourado. */
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--borda-forte);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--txt-forte);
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1;
   text-decoration: none;
 }
 
 .feed__titulo {
-  font-size: 22px;
-  font-weight: 800;
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1.2;
   color: var(--txt-forte);
 }
 
@@ -35,49 +47,49 @@
   display: flex;
   flex-direction: column;
   border: 1px solid var(--borda-forte);
-  border-radius: 16px;
+  border-radius: 20px;
   background: var(--superficie);
   overflow: hidden;
 }
 
 .feed__imagem {
   width: 100%;
-  height: 160px;
+  height: 150px;
   object-fit: cover;
 }
 
 .feed__item-corpo {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   padding: 16px 18px;
 }
 
 .feed__categoria {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--dourado);
+  font-size: 12.5px;
+  font-weight: 900;
+  color: var(--dourado-claro);
 }
 
 .feed__item-titulo {
-  font-size: 17px;
-  font-weight: 800;
-  line-height: 1.2;
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1.25;
   color: var(--txt-forte);
 }
 
 .feed__item-meta {
   font-size: 13px;
+  font-weight: 600;
+  line-height: 1.45;
   color: var(--txt-medio);
-  line-height: 1.4;
 }
 
 .feed__descricao {
-  font-size: 14.5px;
-  line-height: 1.45;
-  color: var(--txt-forte);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--txt-corpo);
   white-space: pre-wrap;
 }
 
@@ -93,24 +105,22 @@
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  padding: 40px 24px;
+  padding: 24px 22px;
+  border: 1px solid var(--borda-forte);
+  border-radius: 20px;
+  background: var(--superficie);
   text-align: center;
 }
 
-.em-breve__logo {
-  width: 160px;
-  mix-blend-mode: screen;
-  filter: drop-shadow(0 4px 14px rgb(212 167 44 / 30%));
-}
-
 .em-breve__titulo {
-  font-size: 22px;
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: 900;
   color: var(--dourado-claro);
 }
 
 .em-breve__texto {
-  font-size: 14.5px;
+  font-size: 13.5px;
+  font-weight: 600;
   line-height: 1.5;
   color: var(--txt-medio);
   max-width: 320px;
@@ -122,36 +132,36 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 14px 16px;
+  padding: 18px 20px;
   border: 1px solid var(--borda-forte);
-  border-radius: 16px;
-  background:
-    linear-gradient(140deg, rgb(233 196 90 / 14%), rgb(212 167 44 / 6%) 70%),
-    var(--superficie);
+  border-radius: 20px;
+  background: var(--superficie);
 }
 
 .perfil__avatar {
   display: grid;
   place-items: center;
   flex: 0 0 auto;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: linear-gradient(140deg, var(--dourado-claro), var(--dourado) 60%, var(--dourado-escuro));
-  color: #1a1a1a;
-  font-size: 28px;
-  font-weight: 800;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--ouro-degrade);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 34%), 0 6px 14px rgb(0 0 0 / 45%);
+  color: var(--acao-texto);
+  font-size: 22px;
+  font-weight: 900;
 }
 
 .perfil__nome {
-  font-size: 18px;
-  font-weight: 800;
+  font-size: 17px;
+  font-weight: 900;
   color: var(--txt-forte);
 }
 
 .perfil__meta {
   margin-top: 2px;
-  font-size: 13px;
+  font-size: 12.5px;
+  font-weight: 700;
   color: var(--txt-medio);
 }
 
@@ -167,20 +177,21 @@
   gap: 2px;
   padding: 14px 10px;
   border: 1px solid var(--borda-forte);
-  border-radius: 14px;
+  border-radius: 16px;
   background: var(--superficie);
   text-align: center;
 }
 
 .perfil__resumo span {
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 900;
   color: var(--dourado-claro);
 }
 
 .perfil__resumo small {
   font-size: 11.5px;
-  letter-spacing: 0.1em;
+  font-weight: 800;
+  letter-spacing: 0.4px;
   text-transform: uppercase;
   color: var(--txt-medio);
 }
@@ -196,13 +207,13 @@
 .biblia__livro {
   display: block;
   width: 100%;
-  padding: 10px 12px;
+  padding: 12px;
   border: 1px solid var(--borda-forte);
-  border-radius: 10px;
+  border-radius: 12px;
   background: var(--superficie);
   color: var(--txt-forte);
-  font-size: 13.5px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 800;
   text-decoration: none;
   text-align: center;
   cursor: pointer;
@@ -215,41 +226,39 @@
 }
 
 .biblia__capitulo {
-  padding: 10px 0;
+  padding: 11px 0;
   border: 1px solid var(--borda-forte);
-  border-radius: 10px;
+  border-radius: 12px;
   background: var(--superficie);
   color: var(--dourado-claro);
-  font-size: 14px;
-  font-weight: 800;
+  font-size: 14.5px;
+  font-weight: 900;
 }
 
 .biblia__texto {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 18px;
+  padding: 18px 20px;
   border: 1px solid var(--borda-forte);
-  border-radius: 16px;
+  border-radius: 20px;
   background: var(--superficie);
 }
 
 .biblia__versiculo {
-  font-size: 15.5px;
-  line-height: 1.65;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.7;
   color: var(--txt-forte);
 }
 
 .biblia__num {
-  font-size: 11px;
-  font-weight: 800;
+  margin-right: 3px;
+  font-size: 11.5px;
+  font-weight: 900;
   color: var(--dourado);
-  margin-right: 2px;
 }
 
 .feed__voltar[type="button"] {
-  background: transparent;
-  border: 0;
-  padding: 0;
   cursor: pointer;
 }

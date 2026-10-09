@@ -37,7 +37,7 @@ export default function FielCarteira() {
   return (
     <div className="feed">
       <header className="feed__topo">
-        <Link to="/" className="feed__voltar">← Voltar</Link>
+        <Link to="/" className="feed__voltar" aria-label="Voltar">‹</Link>
         <h1 className="feed__titulo">Carteira</h1>
       </header>
 

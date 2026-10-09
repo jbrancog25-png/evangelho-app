@@ -18,7 +18,19 @@
   --vermelho: #ff8577;
 
   --txt-forte: #ffffff;
+  --txt-corpo: #dcdde0;
   --txt-medio: #a9abb0;
+  --txt-fraco: #85878d;
+
+  /* O botão de agir: dourado cheio com texto quase preto (branco some). */
+  --acao-fundo: #d4a72c;
+  --acao-texto: #1a1a1a;
+  --acao-ocupado: #a67c1b;
+  --acao-sombra: 0 6px 14px rgb(212 167 44 / 30%);
+  /* O dourado do avatar e dos ícones em destaque. */
+  --ouro-degrade: linear-gradient(180deg, #f1cf6a 0%, #d4a72c 55%, #a67c1b 100%);
+  /* O fundo dos botões de contorno e das pílulas do Explorar. */
+  --vidro: linear-gradient(180deg, rgb(255 255 255 / 9%) 0%, rgb(255 255 255 / 2%) 100%);
 
   font-family: 'Nunito', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
   color-scheme: dark;

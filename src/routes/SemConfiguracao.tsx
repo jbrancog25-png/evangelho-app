@@ -1,10 +1,12 @@
-import logo from '../assets/vida-em-cristo.jpg'
+import MarcaIgreja from '../components/MarcaIgreja'
 import './Autenticacao.css'
 
 export default function SemConfiguracao() {
   return (
     <div className="auth">
-      <img className="auth__logo" src={logo} alt="" />
+      <div className="auth__marca">
+        <MarcaIgreja tamanho="painel" />
+      </div>
       <h1 className="auth__titulo">Configuração pendente</h1>
       <p className="auth__subtitulo">
         O app ainda não está conectado ao Supabase. Siga o guia abaixo para habilitar login e banco de dados.

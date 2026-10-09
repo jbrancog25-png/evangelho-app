@@ -39,8 +39,8 @@ export default function PastorDashboard() {
   return (
     <div className="admin">
       <header className="admin__topo">
-        <Link to="/" className="admin__marca">
-          <span>← Voltar</span>
+        <Link to="/" className="feed__voltar" aria-label="Voltar">
+          ‹
         </Link>
       </header>
 

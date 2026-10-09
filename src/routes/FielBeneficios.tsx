@@ -34,7 +34,7 @@ export default function FielBeneficios() {
   return (
     <div className="feed">
       <header className="feed__topo">
-        <Link to="/" className="feed__voltar">← Voltar</Link>
+        <Link to="/" className="feed__voltar" aria-label="Voltar">‹</Link>
         <h1 className="feed__titulo">Clube de benefícios</h1>
       </header>
 

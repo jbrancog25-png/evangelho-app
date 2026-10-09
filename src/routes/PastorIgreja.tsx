@@ -35,8 +35,8 @@ export default function PastorIgreja() {
   return (
     <div className="admin">
       <header className="admin__topo">
-        <Link to="/pastor" className="admin__marca">
-          <span>← Voltar</span>
+        <Link to="/pastor" className="feed__voltar" aria-label="Voltar">
+          ‹
         </Link>
       </header>
 
