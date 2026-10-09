@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { AuthProvider } from './providers/AuthProvider'
 import RotaProtegida from './components/RotaProtegida'
-import Splash from './components/Splash'
+import Splash, { deveAbrir } from './components/Splash'
 import HomeScreen from './screens/HomeScreen'
 import Entrar from './routes/Entrar'
 import Cadastrar from './routes/Cadastrar'
@@ -46,7 +46,9 @@ import { supabaseConfigurada } from './lib/supabase'
 import './App.css'
 
 export default function App() {
-  const [mostrarSplash, setMostrarSplash] = useState(true)
+  const [mostrarSplash, setMostrarSplash] = useState(deveAbrir)
+  // Estável: a abertura reinicia seus timers se esta função mudar.
+  const fecharSplash = useCallback(() => setMostrarSplash(false), [])
 
   if (!supabaseConfigurada) {
     return (
@@ -62,7 +64,7 @@ export default function App() {
     <AuthProvider>
       <BrowserRouter>
         <div className="app">
-          {mostrarSplash && <Splash onConcluir={() => setMostrarSplash(false)} />}
+          {mostrarSplash && <Splash onConcluir={fecharSplash} />}
           <main className="app__tela">
             <Routes>
               <Route path="/" element={<HomeScreen />} />

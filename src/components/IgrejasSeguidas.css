@@ -13,7 +13,7 @@
   border: 1px solid var(--borda-forte);
   border-radius: 18px;
   background:
-    linear-gradient(180deg, rgb(198 163 91 / 10%), transparent 55%),
+    linear-gradient(180deg, rgb(212 167 44 / 10%), transparent 55%),
     var(--superficie);
 }
 
@@ -46,7 +46,7 @@
   padding: 12px 14px;
   border-left: 3px solid var(--dourado);
   border-radius: 0 10px 10px 0;
-  background: rgb(198 163 91 / 6%);
+  background: rgb(212 167 44 / 6%);
   font-size: 14.5px;
   line-height: 1.45;
   color: var(--txt-forte);

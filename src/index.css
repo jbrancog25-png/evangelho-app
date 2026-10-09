@@ -1,21 +1,24 @@
 :root {
-  --fundo-topo: #000000;
-  --fundo-base: #000000;
-  --superficie: #141416;
-  --superficie-elev: #1b1b1e;
-  --borda: rgb(198 163 91 / 18%);
-  --borda-forte: rgb(198 163 91 / 42%);
-  --borda-tracejada: rgb(198 163 91 / 32%);
+  /* A paleta do Evangelho antigo (conex-app/src/theme.ts, "preto"):
+     preto do logo, painéis um degrau acima e o dourado do logo. */
+  --fundo-topo: #0a0a0b;
+  --fundo-base: #0a0a0b;
+  --superficie: #18191b;
+  --superficie-elev: #111113;
+  /* O fio dourado fechado em volta de cada caixa. */
+  --borda: rgb(156 122 34 / 45%);
+  --borda-forte: #9c7a22;
+  --borda-tracejada: rgb(156 122 34 / 70%);
 
-  --dourado: #c6a35b;
-  --dourado-claro: #e2c38a;
-  --dourado-escuro: #8c7232;
-  --verde: #34c77b;
-  --ambar: #c6a35b;
-  --vermelho: #e5342b;
+  --dourado: #d4a72c;
+  --dourado-claro: #e9c45a;
+  --dourado-escuro: #a67c1b;
+  --verde: #7fd6a8;
+  --ambar: #d4a72c;
+  --vermelho: #ff8577;
 
   --txt-forte: #ffffff;
-  --txt-medio: #9a9aa0;
+  --txt-medio: #a9abb0;
 
   font-family: 'Nunito', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
   color-scheme: dark;

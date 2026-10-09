@@ -100,7 +100,7 @@
 .em-breve__logo {
   width: 160px;
   mix-blend-mode: screen;
-  filter: drop-shadow(0 4px 14px rgb(198 163 91 / 30%));
+  filter: drop-shadow(0 4px 14px rgb(212 167 44 / 30%));
 }
 
 .em-breve__titulo {
@@ -126,7 +126,7 @@
   border: 1px solid var(--borda-forte);
   border-radius: 16px;
   background:
-    linear-gradient(140deg, rgb(226 195 138 / 14%), rgb(198 163 91 / 6%) 70%),
+    linear-gradient(140deg, rgb(233 196 90 / 14%), rgb(212 167 44 / 6%) 70%),
     var(--superficie);
 }
 
@@ -138,7 +138,7 @@
   height: 64px;
   border-radius: 50%;
   background: linear-gradient(140deg, var(--dourado-claro), var(--dourado) 60%, var(--dourado-escuro));
-  color: #1a1409;
+  color: #1a1a1a;
   font-size: 28px;
   font-weight: 800;
 }

@@ -13,16 +13,47 @@
 .home__marca {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  gap: 10px;
   padding: 0 var(--gutter);
 }
 
 .home__marca-logo {
-  width: min(68%, 240px);
-  height: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.home__marca-globo {
+  flex-shrink: 0;
+  width: auto;
+  height: clamp(50px, 16vw, 62px);
+}
+
+.home__marca-nome {
+  min-width: 0;
+  width: auto;
+  height: clamp(34px, 11.4vw, 45px);
   object-fit: contain;
-  mix-blend-mode: screen;
-  filter: drop-shadow(0 4px 14px rgb(198 163 91 / 25%));
+}
+
+.home__marca-credito {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+  color: var(--txt-medio);
+}
+
+.home__marca-credito img {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
 }
 
 /* ---------- Saudação ---------- */
@@ -42,7 +73,7 @@
   height: 58px;
   border-radius: 15px;
   background: linear-gradient(140deg, var(--dourado-claro), var(--dourado) 60%, var(--dourado-escuro));
-  color: #1a1409;
+  color: #1a1a1a;
   font-size: 28px;
   font-weight: 800;
   line-height: 1;
@@ -77,7 +108,7 @@
   color: var(--dourado-claro);
   font-size: 16px;
   font-weight: 700;
-  box-shadow: 0 0 14px rgb(198 163 91 / 18%) inset;
+  box-shadow: 0 0 14px rgb(212 167 44 / 18%) inset;
 }
 
 .home__avisos-badge {
@@ -109,7 +140,7 @@
 .card--saldo {
   padding: 24px 20px;
   background:
-    linear-gradient(180deg, rgb(198 163 91 / 10%), transparent 60%),
+    linear-gradient(180deg, rgb(212 167 44 / 10%), transparent 60%),
     var(--superficie);
 }
 
@@ -118,7 +149,7 @@
   color: inherit;
   padding: 14px 18px;
   background:
-    linear-gradient(140deg, rgb(226 195 138 / 18%), rgb(198 163 91 / 8%) 70%),
+    linear-gradient(140deg, rgb(233 196 90 / 18%), rgb(212 167 44 / 8%) 70%),
     var(--superficie);
 }
 
@@ -165,7 +196,7 @@
   gap: 14px;
   padding: 22px;
   background:
-    radial-gradient(circle at top right, rgb(198 163 91 / 10%), transparent 60%),
+    radial-gradient(circle at top right, rgb(212 167 44 / 10%), transparent 60%),
     var(--superficie);
 }
 
@@ -212,7 +243,7 @@
   height: 46px;
   border-radius: 13px;
   background: linear-gradient(140deg, var(--dourado-claro), var(--dourado) 60%, var(--dourado-escuro));
-  color: #1a1409;
+  color: #1a1a1a;
 }
 
 .louvores__icone svg {
@@ -261,8 +292,8 @@
 
 .botao--primario {
   background: linear-gradient(140deg, var(--dourado-claro), var(--dourado) 60%, var(--dourado-escuro));
-  color: #1a1409;
-  box-shadow: 0 6px 18px rgb(198 163 91 / 25%);
+  color: #1a1a1a;
+  box-shadow: 0 6px 18px rgb(212 167 44 / 25%);
 }
 
 .botao--ghost {

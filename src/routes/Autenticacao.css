@@ -19,7 +19,7 @@
   margin: 10px auto 0;
   object-fit: contain;
   mix-blend-mode: screen;
-  filter: drop-shadow(0 4px 14px rgb(198 163 91 / 30%));
+  filter: drop-shadow(0 4px 14px rgb(212 167 44 / 30%));
 }
 
 .auth__titulo {
