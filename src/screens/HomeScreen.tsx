@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ChevronRightIcon, CompartilharIcon, LouvoresIcon, PhotoIcon } from '../components/Icons'
+import { ChevronRightIcon, CompartilharIcon, PhotoIcon } from '../components/Icons'
 import { atalhosExplorar, usuario, versiculoDia as versiculoFallback, campanhas as campanhasFallback } from '../data/home'
 import type { AtalhoExplorar, AtalhoGrupo, Campanha as CampanhaMock } from '../data/home'
 import type { IgrejaSeguida } from '../data/igrejas'
@@ -137,19 +137,6 @@ export default function HomeScreen() {
         <p className="versiculo__texto">“{versiculo.texto}”</p>
         <p className="versiculo__referencia">{versiculo.referencia}</p>
       </section>
-
-      <Link to="/louvores" className="card card--louvores">
-        <span className="louvores__icone">
-          <LouvoresIcon />
-        </span>
-        <span className="louvores__texto">
-          <span className="louvores__titulo">Ouvir louvores</span>
-          <span className="louvores__subtitulo">
-            Música gospel grátis, enquanto você usa o app
-          </span>
-        </span>
-        <ChevronRightIcon className="louvores__seta" />
-      </Link>
 
       <IgrejasSeguidas igrejas={logado ? igrejasReais : []} />
 

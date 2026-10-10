@@ -1,31 +1,97 @@
+import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import { useTocador } from '../hooks/useTocador'
 import { playerSoundCloud, playlistDoSoundCloud } from '../lib/soundcloud'
 import './TocadorLouvores.css'
 
+type SCSound = { title: string; user?: { username?: string }; artwork_url?: string | null }
+type SCWidget = {
+  play(): void
+  pause(): void
+  next(): void
+  prev(): void
+  bind(event: string, cb: (...args: unknown[]) => void): void
+  getCurrentSound(cb: (s: SCSound | null) => void): void
+}
+
+declare global {
+  interface Window {
+    SC?: {
+      Widget: ((iframe: HTMLIFrameElement) => SCWidget) & {
+        Events: { READY: string; PLAY: string; PAUSE: string; FINISH: string }
+      }
+    }
+  }
+}
+
 /**
- * O player do SoundCloud, que sobrevive à troca de tela (vem do Evangelho antigo).
+ * O player do SoundCloud, que sobrevive à troca de tela.
  *
- * Mora no App, fora das rotas: se morasse na tela de Louvores, sair dela
- * desligaria a música. Em /louvores ele aparece logo abaixo da tela; nas
- * outras, fica montado mas fora da vista, e a música segue. Esconder com
- * `display: none` não serve: alguns navegadores param a mídia de um quadro
- * invisível. Por isso ele encolhe para 1 pixel, transparente e sem toque.
- *
- * Nas outras telas, um botão "♪ Louvores" leva de volta ao player.
+ * Em qualquer rota (menos /louvores) aparece como barra flutuante com
+ * controles reais (play/pause/anterior/próximo) via SoundCloud Widget API.
+ * Em /louvores vira o player cheio.
  */
 export default function TocadorLouvores() {
   const { session } = useAuth()
   const { tocando } = useTocador()
   const { pathname } = useLocation()
+  const iframeRef = useRef<HTMLIFrameElement | null>(null)
+  const widgetRef = useRef<SCWidget | null>(null)
+  const [pronto, setPronto] = useState(false)
+  const [tocandoAgora, setTocandoAgora] = useState(false)
+  const [faixa, setFaixa] = useState<SCSound | null>(null)
+
+  const noPlayer = pathname === '/louvores'
+  const endereco = tocando ? playlistDoSoundCloud(tocando.url) : null
+
+  // Reset estado quando trocar de playlist
+  useEffect(() => {
+    setPronto(false)
+    setTocandoAgora(false)
+    setFaixa(null)
+    widgetRef.current = null
+  }, [tocando?.id])
+
+  // Conecta ao widget quando o iframe estiver no DOM e o script do SC carregado
+  useEffect(() => {
+    if (!iframeRef.current || !endereco) return
+    let cancelado = false
+
+    function tentarConectar(tentativa = 0) {
+      if (cancelado) return
+      const iframe = iframeRef.current
+      if (!iframe || !window.SC?.Widget) {
+        if (tentativa < 40) {
+          window.setTimeout(() => tentarConectar(tentativa + 1), 100)
+        }
+        return
+      }
+      const w = window.SC.Widget(iframe)
+      widgetRef.current = w
+      const ev = window.SC.Widget.Events
+      w.bind(ev.READY, () => {
+        if (cancelado) return
+        setPronto(true)
+        w.getCurrentSound((s) => s && setFaixa(s))
+      })
+      w.bind(ev.PLAY, () => {
+        if (cancelado) return
+        setTocandoAgora(true)
+        w.getCurrentSound((s) => s && setFaixa(s))
+      })
+      w.bind(ev.PAUSE, () => !cancelado && setTocandoAgora(false))
+      w.bind(ev.FINISH, () => !cancelado && setTocandoAgora(false))
+    }
+
+    tentarConectar()
+    return () => { cancelado = true }
+  }, [tocando?.id, endereco])
 
   if (!session || !tocando) return null
-  const visivel = pathname === '/louvores'
-  const endereco = playlistDoSoundCloud(tocando.url)
 
   if (!endereco) {
-    return visivel ? (
+    return noPlayer ? (
       <div className="tocador">
         <p className="auth__erro">
           Esta playlist não abriu: o endereço cadastrado no painel não é de uma playlist do
@@ -35,22 +101,29 @@ export default function TocadorLouvores() {
     ) : null
   }
 
+  const play = () => widgetRef.current?.play()
+  const pause = () => widgetRef.current?.pause()
+  const proximo = () => widgetRef.current?.next()
+  const anterior = () => widgetRef.current?.prev()
+
+  const tituloFaixa = faixa?.title ?? tocando.titulo
+  const autorFaixa = faixa?.user?.username ?? tocando.autor ?? 'Louvores'
+
   return (
     <>
-      <div className={visivel ? 'tocador' : 'tocador tocador--escondido'} aria-hidden={!visivel}>
+      <div className={noPlayer ? 'tocador' : 'tocador tocador--escondido'} aria-hidden={!noPlayer}>
         <iframe
-          // A chave troca o quadro quando a playlist muda — sem ela o player
-          // continuaria na playlist anterior.
+          ref={iframeRef}
           key={tocando.id}
           className="tocador__quadro"
           title={`Louvores — ${tocando.titulo}`}
           src={playerSoundCloud(endereco)}
           width="100%"
-          height={visivel ? 460 : 1}
+          height={noPlayer ? 460 : 1}
           allow="autoplay; encrypted-media"
           loading="lazy"
         />
-        {visivel && (
+        {noPlayer && (
           <>
             {tocando.pagina && (
               <p className="tocador__credito">
@@ -67,11 +140,44 @@ export default function TocadorLouvores() {
         )}
       </div>
 
-      {!visivel && (
-        <div className="tocador__atalho">
-          <Link to="/louvores" className="tocador__atalho-botao">
-            ♪ Louvores
+      {!noPlayer && (
+        <div className="tocador-barra" role="region" aria-label="Tocando louvores">
+          <Link to="/louvores" className="tocador-barra__info" aria-label="Abrir louvores">
+            <span className="tocador-barra__onda" aria-hidden="true">♪</span>
+            <span className="tocador-barra__textos">
+              <span className="tocador-barra__titulo">{tituloFaixa}</span>
+              <span className="tocador-barra__artista">{autorFaixa}</span>
+            </span>
           </Link>
+          <div className="tocador-barra__controles">
+            <button
+              type="button"
+              onClick={anterior}
+              disabled={!pronto}
+              aria-label="Anterior"
+              className="tocador-barra__botao"
+            >
+              ⏮
+            </button>
+            <button
+              type="button"
+              onClick={() => (tocandoAgora ? pause() : play())}
+              disabled={!pronto}
+              className="tocador-barra__botao tocador-barra__play"
+              aria-label={tocandoAgora ? 'Pausar' : 'Tocar'}
+            >
+              {tocandoAgora ? '⏸' : '▶'}
+            </button>
+            <button
+              type="button"
+              onClick={proximo}
+              disabled={!pronto}
+              aria-label="Próxima"
+              className="tocador-barra__botao"
+            >
+              ⏭
+            </button>
+          </div>
         </div>
       )}
     </>

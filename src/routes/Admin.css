@@ -133,6 +133,13 @@
   gap: 10px;
 }
 
+/* Cabeçalho de seção (fora de uma listagem) ganha respiro no eixo vertical
+   para o botão "+ Novo" não encostar no próximo bloco (filtros, forms, lista). */
+.admin__item-cab:has(> .admin__secao-titulo) {
+  align-items: center;
+  margin-bottom: 6px;
+}
+
 .admin__item-nome {
   font-size: 16px;
   font-weight: 900;

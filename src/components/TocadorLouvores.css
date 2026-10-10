@@ -39,28 +39,106 @@
   color: var(--txt-medio);
 }
 
-/* Tocando em outra tela: um atalho de volta ao player, no canto de baixo. */
-.tocador__atalho {
+/* ---------- Barra flutuante com controles reais ---------- */
+
+.tocador-barra {
   position: fixed;
   left: 50%;
-  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
   z-index: 50;
   display: flex;
-  justify-content: flex-end;
-  width: min(100%, 480px);
-  padding: 0 20px;
+  align-items: center;
+  gap: 10px;
+  width: min(100% - 24px, 456px);
+  padding: 8px 10px 8px 12px;
+  border: 1px solid var(--borda-forte);
+  border-radius: 999px;
+  background: rgb(16 16 18 / 92%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 24px rgb(0 0 0 / 55%);
   transform: translateX(-50%);
-  pointer-events: none;
 }
 
-.tocador__atalho-botao {
-  padding: 11px 16px;
-  border-radius: 100px;
-  background: var(--acao-fundo);
-  box-shadow: 0 8px 20px rgb(0 0 0 / 45%);
-  color: var(--acao-texto);
-  font-size: 13.5px;
-  font-weight: 900;
+.tocador-barra__info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 auto;
+  min-width: 0;
+  color: inherit;
   text-decoration: none;
-  pointer-events: auto;
+}
+
+.tocador-barra__onda {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(140deg, var(--dourado-claro), var(--dourado) 60%, var(--dourado-escuro));
+  color: #1a1409;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.tocador-barra__textos {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.tocador-barra__titulo {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--txt-forte);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tocador-barra__artista {
+  font-size: 11.5px;
+  color: var(--txt-medio);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tocador-barra__controles {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+}
+
+.tocador-barra__botao {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--txt-forte);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.tocador-barra__play {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(140deg, var(--dourado-claro), var(--dourado) 60%, var(--dourado-escuro));
+  color: #1a1409;
+  font-size: 14px;
+}
+
+.tocador-barra__botao:disabled {
+  opacity: 0.4;
+}
+
+/* Dá espaço no fim das telas para o conteúdo não ficar sob a barra. */
+.app__tela {
+  padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px));
 }
