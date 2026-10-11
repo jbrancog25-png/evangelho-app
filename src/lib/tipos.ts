@@ -235,3 +235,28 @@ export type Desapego = {
   disponivel: boolean
   criado_em: string
 }
+
+export type HorarioConsulta = {
+  id: string
+  especialidade: string
+  profissional: string
+  modalidade: 'online' | 'presencial'
+  local: string
+  data: string
+  hora: string
+  duracao_min: number
+  vagas: number
+  restantes: number
+  observacao: string
+}
+
+export type ConsultaMinha = {
+  id: string
+  horario_id: string
+  nome: string
+  telefone: string
+  motivo: string
+  status: 'marcada' | 'cancelada' | 'atendida' | 'faltou'
+  criado_em: string
+  horario?: HorarioConsulta | null
+}

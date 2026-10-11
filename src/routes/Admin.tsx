@@ -35,6 +35,7 @@ export default function Admin() {
         <NavLink to="/admin/louvores" className="admin__nav-item">Louvores</NavLink>
         <NavLink to="/admin/sangue" className="admin__nav-item">Sangue</NavLink>
         <NavLink to="/admin/desapegos" className="admin__nav-item">Desapego</NavLink>
+        <NavLink to="/admin/consultas" className="admin__nav-item">Consultas</NavLink>
       </nav>
 
       <main className="admin__main">

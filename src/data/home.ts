@@ -102,7 +102,7 @@ export const atalhosExplorar: AtalhoExplorar[] = [
   { id: 'cultura', rotulo: 'Cultura', Icone: CulturaIcon, grupo: 'fieis', rota: '/atividade/cultural' },
   { id: 'educacao', rotulo: 'Educação', Icone: EducacaoIcon, grupo: 'fieis', rota: '/atividade/educativo' },
   { id: 'cursos', rotulo: 'Cursos', Icone: CursosIcon, grupo: 'fieis', rota: '/cursos' },
-  { id: 'saude', rotulo: 'Saúde', Icone: SaudeIcon, grupo: 'fieis', rota: '/atividade/saude' },
+  { id: 'saude', rotulo: 'Saúde', Icone: SaudeIcon, grupo: 'fieis', rota: '/saude' },
   { id: 'sangue', rotulo: 'Sangue', Icone: SangueIcon, grupo: 'fieis', rota: '/sangue' },
   { id: 'cestas-basicas', rotulo: 'Cestas básicas', Icone: CestasIcon, grupo: 'fieis', rota: '/cestas' },
   { id: 'beneficios', rotulo: 'Clube de benefícios', Icone: BeneficiosIcon, grupo: 'fieis', rota: '/beneficios' },

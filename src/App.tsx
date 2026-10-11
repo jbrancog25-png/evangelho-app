@@ -23,6 +23,7 @@ import AdminBeneficios from './routes/AdminBeneficios'
 import AdminLouvores from './routes/AdminLouvores'
 import AdminSangue from './routes/AdminSangue'
 import AdminDesapegos from './routes/AdminDesapegos'
+import AdminConsultas from './routes/AdminConsultas'
 import PastorNovaIgreja from './routes/PastorNovaIgreja'
 import PastorDashboard from './routes/PastorDashboard'
 import PastorIgreja from './routes/PastorIgreja'
@@ -42,6 +43,7 @@ import FielBiblia from './routes/FielBiblia'
 import FielIngles from './routes/FielIngles'
 import FielIgrejas from './routes/FielIgrejas'
 import FielCultos from './routes/FielCultos'
+import FielSaude from './routes/FielSaude'
 import Perfil from './routes/Perfil'
 import EmBreve from './routes/EmBreve'
 import SemConfiguracao from './routes/SemConfiguracao'
@@ -121,6 +123,7 @@ export default function App() {
                   <Route path="louvores" element={<AdminLouvores />} />
                   <Route path="sangue" element={<AdminSangue />} />
                   <Route path="desapegos" element={<AdminDesapegos />} />
+                  <Route path="consultas" element={<AdminConsultas />} />
                 </Route>
 
                 <Route
@@ -256,6 +259,14 @@ export default function App() {
                   element={
                     <RotaProtegida>
                       <FielCultos />
+                    </RotaProtegida>
+                  }
+                />
+                <Route
+                  path="/saude"
+                  element={
+                    <RotaProtegida>
+                      <FielSaude />
                     </RotaProtegida>
                   }
                 />
