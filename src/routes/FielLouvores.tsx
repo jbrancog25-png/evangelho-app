@@ -3,8 +3,9 @@ import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import type { Louvor } from '../lib/tipos'
+import { useAuth } from '../hooks/useAuth'
 import { useTocador } from '../hooks/useTocador'
-import { PLAYLIST_PADRAO, paginaDoSoundCloud, playlistDoSoundCloud, type Playlist } from '../lib/soundcloud'
+import { paginaDoSoundCloud, playlistDoSoundCloud, type Playlist } from '../lib/soundcloud'
 import './Feed.css'
 
 /** Um louvor do painel com link do SoundCloud vira uma playlist no player. */
@@ -26,11 +27,14 @@ function comoPlaylist(l: Louvor): Playlist {
  * mora em `TocadorLouvores`, no App, para a música continuar tocando quando o
  * fiel vai para outra tela.
  *
- * Os louvores do painel com link do SoundCloud viram playlists do player. Sem
- * nenhum, toca a playlist do app antigo. Os de outros sites (YouTube,
- * Spotify…) aparecem embaixo, com o botão "Ouvir".
+ * Toda playlist sai do painel admin (/admin/louvores). Antes havia uma
+ * PLAYLIST_PADRAO hardcoded, mas o canal público sumiu e o widget quebrou —
+ * agora, se o painel está vazio, a tela explica isso em vez de mostrar erro
+ * do SoundCloud. Louvores de outros sites (YouTube, Spotify…) aparecem
+ * embaixo, com o botão "Ouvir".
  */
 export default function FielLouvores() {
+  const { profile } = useAuth()
   const { tocando, tocar } = useTocador()
   const [playlists, setPlaylists] = useState<Playlist[]>([])
   const [outros, setOutros] = useState<Louvor[]>([])
@@ -48,7 +52,7 @@ export default function FielLouvores() {
         if (error) setErro(error.message)
         const lista = (data ?? []) as Louvor[]
         const doSoundCloud = lista.filter((l) => playlistDoSoundCloud(l.url))
-        setPlaylists(doSoundCloud.length > 0 ? doSoundCloud.map(comoPlaylist) : [PLAYLIST_PADRAO])
+        setPlaylists(doSoundCloud.map(comoPlaylist))
         setOutros(lista.filter((l) => !playlistDoSoundCloud(l.url)))
       })
   }, [])
@@ -80,6 +84,20 @@ export default function FielLouvores() {
 
       {carregando && <p className="admin__vazio">Carregando…</p>}
       {erro && <p className="auth__erro">{erro}</p>}
+
+      {!carregando && playlists.length === 0 && outros.length === 0 && (
+        <div className="admin__vazio" style={{ marginTop: 16 }}>
+          <p style={{ marginBottom: 10 }}>
+            Nenhuma playlist cadastrada ainda. Em breve o Evangelho terá uma biblioteca
+            de louvores para você ouvir enquanto usa o app.
+          </p>
+          {profile?.role === 'super_admin' && (
+            <Link to="/admin/louvores" className="botao botao--primario">
+              Cadastrar primeira playlist
+            </Link>
+          )}
+        </div>
+      )}
 
       {playlists.length > 1 && (
         <div className="louvores__escolha">

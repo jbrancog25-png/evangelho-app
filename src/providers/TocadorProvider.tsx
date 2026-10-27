@@ -1,14 +1,15 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { TocadorContext } from '../hooks/useTocador'
-import { PLAYLIST_PADRAO, paginaDoSoundCloud, playlistDoSoundCloud, type Playlist } from '../lib/soundcloud'
+import { paginaDoSoundCloud, playlistDoSoundCloud, type Playlist } from '../lib/soundcloud'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../hooks/useAuth'
 import type { Louvor } from '../lib/tipos'
 
 /**
- * Guarda a playlist em execução acima das rotas, para a música seguir de tela em tela.
- * Quando o fiel loga, carregamos a primeira playlist publicada no painel (ou a
- * padrão) — assim o player já nasce pronto, sem precisar visitar /louvores.
+ * Guarda a playlist em execução acima das rotas, para a música seguir de tela
+ * em tela. Quando o fiel loga, carrega a primeira playlist publicada do painel
+ * — se existir. Sem louvores cadastrados o player fica desligado (a barra não
+ * aparece, e /louvores explica como cadastrar).
  */
 export function TocadorProvider({ children }: { children: ReactNode }) {
   const { session } = useAuth()
@@ -36,8 +37,6 @@ export function TocadorProvider({ children }: { children: ReactNode }) {
             autor: primeiraDoSoundCloud.artista ?? '',
             descricao: primeiraDoSoundCloud.playlist ?? '',
           })
-        } else {
-          tocar(PLAYLIST_PADRAO)
         }
       })
   }, [session])

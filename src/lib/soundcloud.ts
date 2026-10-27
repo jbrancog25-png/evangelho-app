@@ -17,23 +17,17 @@ export type Playlist = {
 }
 
 /**
- * Playlist que toca quando nenhum louvor do SoundCloud foi cadastrado no
- * painel — para a tela nunca abrir vazia.
+ * Antes existia uma PLAYLIST_PADRAO hardcoded aqui (canal `baixarmusicagospel`
+ * no SoundCloud). O canal foi deletado em algum momento, o widget passou a
+ * acusar "playlist não encontrada", e a tela de Louvores quebrou para todo
+ * mundo que não tinha nada cadastrado no painel.
  *
- * A URL é a da própria página pública da playlist (o widget aceita esse
- * formato). Antes era o URN `soundcloud:playlists:2178933647` encoded dentro
- * de `api.soundcloud.com/playlists/...`, mas em algum momento o SoundCloud
- * deixou de reconhecer esse formato e o widget passou a mostrar "playlist
- * não encontrada". A página direta é mais estável.
+ * A lição: qualquer URL pública de terceiro pode sumir sem aviso. Em vez de
+ * procurar outra playlist e esperar que ela viva para sempre, o app agora
+ * assume que **toda playlist que toca saiu do painel admin** (/admin/louvores).
+ * Se o painel está vazio, o player simplesmente não aparece e a tela de
+ * Louvores explica isso ao fiel (e dá o atalho se for super_admin).
  */
-export const PLAYLIST_PADRAO: Playlist = {
-  id: 'padrao',
-  titulo: 'Louvores 2026',
-  url: 'https://soundcloud.com/baixarmusicagospel/sets/louvores-2025-2026',
-  pagina: 'https://soundcloud.com/baixarmusicagospel/sets/louvores-2025-2026',
-  autor: 'Música Gospel',
-  descricao: 'Gospel mais tocadas, para ouvir em qualquer hora do dia.',
-}
 
 /**
  * Tira, do que a equipe colou no painel, o endereço que o player entende.
