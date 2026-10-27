@@ -17,14 +17,19 @@ export type Playlist = {
 }
 
 /**
- * A playlist do Evangelho antigo. Toca quando nenhum louvor do SoundCloud foi
- * cadastrado no painel, para a tela nunca abrir vazia.
- * O endereço vem do código de incorporar do próprio SoundCloud (número 2178933647).
+ * Playlist que toca quando nenhum louvor do SoundCloud foi cadastrado no
+ * painel — para a tela nunca abrir vazia.
+ *
+ * A URL é a da própria página pública da playlist (o widget aceita esse
+ * formato). Antes era o URN `soundcloud:playlists:2178933647` encoded dentro
+ * de `api.soundcloud.com/playlists/...`, mas em algum momento o SoundCloud
+ * deixou de reconhecer esse formato e o widget passou a mostrar "playlist
+ * não encontrada". A página direta é mais estável.
  */
 export const PLAYLIST_PADRAO: Playlist = {
   id: 'padrao',
   titulo: 'Louvores 2026',
-  url: 'https://api.soundcloud.com/playlists/soundcloud%3Aplaylists%3A2178933647',
+  url: 'https://soundcloud.com/baixarmusicagospel/sets/louvores-2025-2026',
   pagina: 'https://soundcloud.com/baixarmusicagospel/sets/louvores-2025-2026',
   autor: 'Música Gospel',
   descricao: 'Gospel mais tocadas, para ouvir em qualquer hora do dia.',
