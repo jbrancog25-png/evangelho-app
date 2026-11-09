@@ -21,6 +21,7 @@ const TITULOS: Record<string, string> = {
   biblia: 'Bíblia',
   louvores: 'Louvores',
   dizimo: 'Dízimo e ofertas',
+  oracao: 'Pedidos de oração',
   desapego: 'Desapego',
   cultos: 'Cultos',
 }

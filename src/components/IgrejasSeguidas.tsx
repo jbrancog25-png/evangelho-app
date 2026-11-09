@@ -60,21 +60,23 @@ export default function IgrejasSeguidas({ igrejas }: Props) {
               <div className="igreja__detalhe">
                 <dt>Pedidos de oração</dt>
                 <dd>
-                  <button type="button" className="igreja__link">
+                  <Link to="/em-breve/oracao" className="igreja__link">
                     {igreja.pedidosOracao} pedidos ativos
                     <ChevronRightIcon className="igreja__link-seta" />
-                  </button>
+                  </Link>
                 </dd>
               </div>
             </dl>
 
+            {/* Dízimo e pedidos de oração ainda não têm tela no app: os botões
+                levam ao "Em construção" em vez de não fazer nada. */}
             <div className="igreja__acoes">
-              <button type="button" className="botao botao--primario">
+              <Link to="/em-breve/dizimo" className="botao botao--primario">
                 {igreja.dizimoCta}
-              </button>
-              <button type="button" className="botao botao--ghost">
+              </Link>
+              <Link to="/em-breve/oracao" className="botao botao--ghost">
                 Pedir oração
-              </button>
+              </Link>
             </div>
           </li>
         ))}
