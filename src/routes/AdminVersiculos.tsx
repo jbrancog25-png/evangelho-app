@@ -1,6 +1,7 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../hooks/useAuth'
+import { hojeLocal } from '../lib/datas'
 import type { Versiculo } from '../lib/tipos'
 
 export default function AdminVersiculos() {
@@ -21,7 +22,7 @@ export default function AdminVersiculos() {
   useEffect(() => { carregar() }, [])
 
   async function marcarDoDia(v: Versiculo) {
-    const hoje = new Date().toISOString().slice(0, 10)
+    const hoje = hojeLocal()
     // Primeiro desmarca qualquer um de hoje
     await supabase.from('versiculos').update({ do_dia_em: null }).eq('do_dia_em', hoje)
     // Depois marca este
@@ -41,7 +42,7 @@ export default function AdminVersiculos() {
     carregar()
   }
 
-  const hoje = new Date().toISOString().slice(0, 10)
+  const hoje = hojeLocal()
 
   return (
     <section>
