@@ -121,7 +121,9 @@ export default function TocadorLouvores() {
           width="100%"
           height={noPlayer ? 460 : 1}
           allow="autoplay; encrypted-media"
-          loading="lazy"
+          // "lazy" deixava o player sem carregar quando ele ficava abaixo da
+          // dobra ou escondido — os botões da barra ficavam apagados para sempre.
+          loading="eager"
         />
         {noPlayer && (
           <>

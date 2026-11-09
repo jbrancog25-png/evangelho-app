@@ -48,6 +48,7 @@ import Perfil from './routes/Perfil'
 import EmBreve from './routes/EmBreve'
 import SemConfiguracao from './routes/SemConfiguracao'
 import { supabaseConfigurada } from './lib/supabase'
+import Diagnostico from './routes/Diagnostico'
 import './App.css'
 
 export default function App() {
@@ -278,6 +279,8 @@ export default function App() {
                     </RotaProtegida>
                   }
                 />
+
+                <Route path="/diagnostico" element={<Diagnostico />} />
 
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>

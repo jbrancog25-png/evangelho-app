@@ -8,7 +8,8 @@ import IgrejasSeguidas from '../components/IgrejasSeguidas'
 import MarcaIgreja from '../components/MarcaIgreja'
 import { useAuth } from '../hooks/useAuth'
 import { supabase } from '../lib/supabase'
-import { DIAS_SEMANA, type Campanha as CampanhaDb, type Versiculo } from '../lib/tipos'
+import { lerVersiculoDoDia } from '../lib/versiculo'
+import { DIAS_SEMANA, type Campanha as CampanhaDb } from '../lib/tipos'
 import './HomeScreen.css'
 
 /** Acima de 9.999 usa separador de milhar; abaixo disso fica como no painel: "1240 pontos". */
@@ -22,8 +23,6 @@ const gruposExplorar: Array<{ grupo: AtalhoGrupo; titulo: string }> = [
 
 type CampanhaExibida = Pick<CampanhaMock, 'id' | 'titulo' | 'descricao' | 'cor' | 'imagem'>
 
-const hoje = () => new Date().toISOString().slice(0, 10)
-
 export default function HomeScreen() {
   const { session, profile, signOut } = useAuth()
   const logado = !!session
@@ -36,14 +35,11 @@ export default function HomeScreen() {
 
   useEffect(() => {
     if (!logado) return
-    supabase
-      .from('versiculos')
-      .select('texto, referencia')
-      .eq('do_dia_em', hoje())
-      .maybeSingle()
-      .then(({ data }: { data: Pick<Versiculo, 'texto' | 'referencia'> | null }) => {
-        if (data) setVersiculo({ texto: data.texto, referencia: data.referencia })
+    lerVersiculoDoDia()
+      .then((v) => {
+        if (v) setVersiculo({ texto: v.texto, referencia: v.referencia })
       })
+      .catch(() => {})
 
     supabase
       .from('campanhas')

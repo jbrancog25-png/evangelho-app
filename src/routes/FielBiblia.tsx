@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { supabase } from '../lib/supabase'
-import type { Versiculo } from '../lib/tipos'
+import { buscarCapitulo, type VersiculoApi } from '../lib/biblia'
+import { lerVersiculoDoDia, type VersiculoDoDia } from '../lib/versiculo'
 import './Feed.css'
 
 /**
@@ -85,15 +85,15 @@ const LIVROS_NT: Livro[] = [
   { nome: 'Apocalipse', capitulos: 22 },
 ]
 
-type VersiculoApi = { book_name: string; chapter: number; verse: number; text: string }
-
 export default function FielBiblia() {
-  const [versiculoDia, setVersiculoDia] = useState<Pick<Versiculo, 'texto' | 'referencia'> | null>(null)
+  const [versiculoDia, setVersiculoDia] = useState<VersiculoDoDia | null>(null)
   const [livro, setLivro] = useState<Livro | null>(null)
   const [capitulo, setCapitulo] = useState<number | null>(null)
   const [versiculos, setVersiculos] = useState<VersiculoApi[]>([])
   const [carregando, setCarregando] = useState(false)
   const [erro, setErro] = useState<string | null>(null)
+  // Muda para o botão "Tentar de novo" pedir o mesmo capítulo outra vez.
+  const [tentativa, setTentativa] = useState(0)
 
   // Livro e capítulo trocam a tela sem trocar o endereço: volta ao alto também.
   useEffect(() => {
@@ -101,33 +101,31 @@ export default function FielBiblia() {
   }, [livro, capitulo])
 
   useEffect(() => {
-    const hoje = new Date().toISOString().slice(0, 10)
-    supabase
-      .from('versiculos')
-      .select('texto, referencia')
-      .eq('do_dia_em', hoje)
-      .maybeSingle()
-      .then(({ data }) => setVersiculoDia(data))
+    lerVersiculoDoDia()
+      .then(setVersiculoDia)
+      .catch(() => setVersiculoDia(null))
   }, [])
 
   useEffect(() => {
     if (!livro || !capitulo) return
-    const url = `https://bible-api.com/${encodeURIComponent(livro.nome)}+${capitulo}?translation=almeida`
+    const controle = new AbortController()
     setCarregando(true)
     setErro(null)
     setVersiculos([])
-    fetch(url)
-      .then((r) => {
-        if (!r.ok) throw new Error(`HTTP ${r.status}`)
-        return r.json()
+    buscarCapitulo(livro.nome, capitulo, controle.signal)
+      .then((v) => {
+        if (!controle.signal.aborted) setVersiculos(v)
       })
-      .then((data) => {
-        if (data?.error) throw new Error(data.error)
-        setVersiculos(data.verses ?? [])
+      .catch((e: unknown) => {
+        if (controle.signal.aborted) return
+        setErro(`Não foi possível carregar: ${e instanceof Error ? e.message : String(e)}`)
       })
-      .catch((e) => setErro(`Não foi possível carregar: ${e.message}`))
-      .finally(() => setCarregando(false))
-  }, [livro, capitulo])
+      .finally(() => {
+        if (!controle.signal.aborted) setCarregando(false)
+      })
+    // Trocou de capítulo antes de chegar: a resposta velha não sobrescreve a nova.
+    return () => controle.abort()
+  }, [livro, capitulo, tentativa])
 
   // -------------------- Visões --------------------
 
@@ -142,7 +140,14 @@ export default function FielBiblia() {
         </header>
 
         {carregando && <p className="admin__vazio">Carregando…</p>}
-        {erro && <p className="auth__erro">{erro}</p>}
+        {erro && (
+          <div>
+            <p className="auth__erro">{erro}</p>
+            <button type="button" className="botao botao--primario" onClick={() => setTentativa((n) => n + 1)}>
+              Tentar de novo
+            </button>
+          </div>
+        )}
 
         <div className="biblia__texto">
           {versiculos.map((v) => (

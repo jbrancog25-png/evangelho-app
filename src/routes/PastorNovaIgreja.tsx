@@ -4,6 +4,16 @@ import { supabase } from '../lib/supabase'
 import { useAuth } from '../hooks/useAuth'
 import './Autenticacao.css'
 
+/** Um UUID novo — com alternativa para celulares antigos sem `crypto.randomUUID`. */
+function novoId(): string {
+  if (typeof crypto.randomUUID === 'function') return crypto.randomUUID()
+  const b = crypto.getRandomValues(new Uint8Array(16))
+  b[6] = (b[6] & 0x0f) | 0x40
+  b[8] = (b[8] & 0x3f) | 0x80
+  const h = Array.from(b, (x) => x.toString(16).padStart(2, '0')).join('')
+  return `${h.slice(0, 8)}-${h.slice(8, 12)}-${h.slice(12, 16)}-${h.slice(16, 20)}-${h.slice(20)}`
+}
+
 export default function PastorNovaIgreja() {
   const { profile } = useAuth()
   const navigate = useNavigate()
@@ -20,18 +30,22 @@ export default function PastorNovaIgreja() {
     setEnviando(true)
     setErro(null)
 
-    const { data: igreja, error: erroInsert } = await supabase
-      .from('igrejas')
-      .insert({
-        nome,
-        cidade,
-        estado,
-        endereco: endereco || null,
-        criada_por: profile.id,
-        status: 'pendente',
-      })
-      .select()
-      .single()
+    // O id nasce aqui, e a igreja é gravada SEM pedir ela de volta
+    // (`.select()`). Pedir de volta exige que o pastor já possa LER a igreja —
+    // e as regras do banco só deixam o pastor ler a igreja depois do vínculo
+    // em `pastor_igrejas`, que vem logo abaixo. Com `.select()` o banco
+    // recusava todo cadastro de pastor ("new row violates row-level security
+    // policy for table igrejas").
+    const igrejaId = novoId()
+    const { error: erroInsert } = await supabase.from('igrejas').insert({
+      id: igrejaId,
+      nome,
+      cidade,
+      estado,
+      endereco: endereco || null,
+      criada_por: profile.id,
+      status: 'pendente',
+    })
 
     if (erroInsert) {
       setEnviando(false)
@@ -42,7 +56,7 @@ export default function PastorNovaIgreja() {
     // Já vincula o pastor que cadastrou à igreja (pendente até aprovação).
     const { error: erroVinculo } = await supabase
       .from('pastor_igrejas')
-      .insert({ pastor_id: profile.id, igreja_id: igreja.id })
+      .insert({ pastor_id: profile.id, igreja_id: igrejaId })
 
     setEnviando(false)
     if (erroVinculo) {

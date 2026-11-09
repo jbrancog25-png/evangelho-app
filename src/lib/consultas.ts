@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { supabase } from './supabase'
+import { hojeLocal } from './datas'
 import type { ConsultaMinha, HorarioConsulta } from './tipos'
 
 /** Horários abertos (view consultas_abertas), já com restantes calculados. */
@@ -12,7 +13,7 @@ export function useHorariosConsulta() {
   const reload = useCallback(async () => {
     setLoading(true)
     setError(null)
-    const hoje = new Date().toISOString().slice(0, 10)
+    const hoje = hojeLocal()
     const { data: rows, error: err } = await supabase
       .from('consultas_abertas')
       .select('*')
